@@ -1,32 +1,48 @@
-(function() {
+(function () {
   'use strict';
-
   angular
     .module('f321CrmFe')
-    .directive('acmeNavbar', acmeNavbar);
-
+    .directive('aceNavbar', aceNavbar);
+  document.createElement('ace-navbar');
   /** @ngInject */
-  function acmeNavbar() {
+  function aceNavbar() {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
-      scope: {
-          creationDate: '='
+      scope: {},
+      /** @ngInject */
+      controller: function ($state, $cookies) {
+        var vm = this;
+        vm.messages = [
+          {
+            type: 'pink',
+            icon: 'lock',
+            text: '密码安全等级太低，请及时设置！',
+            url: '#/'
+          },
+          {
+            type: 'success',
+            icon: 'user',
+            text: '个人资料不够完善，请及时完善！',
+            url: '#/'
+          }
+        ];
+        vm.short = [
+          {
+            url: '#/',
+            name: '我的约会'
+          }
+        ];
+        vm.logout = function () {
+          $cookies.remove('profile');
+          $state.go('login');
+        }
       },
-      controller: NavbarController,
-      controllerAs: 'vm',
+      controllerAs: 'bar',
       bindToController: true
     };
 
     return directive;
-
-    /** @ngInject */
-    function NavbarController(moment) {
-      var vm = this;
-
-      // "vm.creationDate" is available by directive option "bindToController: true"
-      vm.relativeDate = moment(vm.creationDate).fromNow();
-    }
   }
 
 })();

@@ -1,0 +1,23 @@
+<a class="menu-toggler" id="menu-toggler" href="javascript:void(0);" ng-click="side.show =!side.show">
+  <span class="menu-text"></span>
+</a>
+<div class="sidebar" ng-class="{'menu-min':side.mini,'display':side.show}" id="sidebar">
+  <ul class="nav nav-list">
+    <li>
+      <a ui-sref="home"> <i class="icon-pushpin"></i> <span class="menu-text"> 欢迎您,管理员 </span> </a>
+    </li>
+    <li ng-repeat="menu in side.menus" ng-class="{'active open':menu.active}">
+      <a href="javascript:void(0);" ng-click="menu.active = !menu.active" class="dropdown-toggle"> <i ng-class="menu.icon"></i>
+        <span class="menu-text" ng-bind="menu.name"></span> <b class="arrow icon-angle-down"></b> </a>
+      <ul class="submenu">
+        <li ng-repeat="submenu in menu.items" ng-class="{'active':submenu.active}"><a ng-href="#{{submenu.url}}"> <i
+          class="icon-double-angle-right"></i> <span ng-bind="submenu.text"></span> </a></li>
+      </ul>
+    </li>
+  </ul>
+  <!-- /.nav-list -->
+  <div class="sidebar-collapse" id="sidebar-collapse">
+    <i ng-class="{'icon-double-angle-left':!side.mini,'icon-double-angle-right':side.mini}"
+       ng-click="side.mini =!side.mini"></i>
+  </div>
+</div>

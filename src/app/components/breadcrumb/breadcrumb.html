@@ -1,0 +1,15 @@
+<div class="breadcrumbs" id="breadcrumbs">
+  <ul class="breadcrumb">
+    <li ng-class="{'active':$index==breadcrumb.links.length-1}" ng-repeat="link in breadcrumb.links">
+      <i ng-class="link.icon" ng-if="link.icon"></i>
+      <a ng-href="#{{link.url}}" ng-bind="link.name" ng-if="link.url"></a>
+      <span ng-if="!link.url" ng-bind="link.name"></span>
+    </li>
+  </ul>
+  <!-- .breadcrumb -->
+  <div class="nav-search tooltip-info cursor-pointer top8" id="nav-search" data-rel="tooltip"
+       data-placement="left" title="刷新主界面" ng-click="breadcrumb.reload()">
+    <i class="icon-refresh bigger-150 align-middle text-primary"></i>
+  </div>
+  <!-- #nav-search -->
+</div>

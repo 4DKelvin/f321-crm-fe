@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -6,16 +6,11 @@
     .config(routerConfig);
 
   /** @ngInject */
-  function routerConfig($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('home', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
-      });
+  function routerConfig($stateProvider, $urlRouterProvider, short_url, common_url) {
 
-    $urlRouterProvider.otherwise('/');
-  }
-
+    short_url.concat(common_url).forEach(function (state) {
+      $stateProvider.state(state.key, state);
+    });
+    $urlRouterProvider.otherwise(common_url[0].url);
+  };
 })();
