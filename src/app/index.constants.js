@@ -67,9 +67,9 @@
         key: 'p-service',
         url: '/personal/service',
         cache: false,
-        templateUrl: 'app/views/personal-service.html',
-        controller: 'personalService',
-        controllerAs: 'ps'
+        templateUrl: 'app/views/personal-normal.html',
+        controller: 'personalNormal',
+        controllerAs: 'pn'
       }, {
         group: '个人资源管理',
         groupIco: 'icon-puzzle-piece',
@@ -77,9 +77,9 @@
         key: 'p-continues',
         url: '/personal/continues',
         cache: false,
-        templateUrl: 'app/views/personal-continues.html',
-        controller: 'personalContinues',
-        controllerAs: 'pc'
+        templateUrl: 'app/views/personal-normal.html',
+        controller: 'personalNormal',
+        controllerAs: 'pn'
       }, {
         group: '个人资源管理',
         groupIco: 'icon-puzzle-piece',
@@ -87,9 +87,9 @@
         key: 'p-important',
         url: '/personal/important',
         cache: false,
-        templateUrl: 'app/views/personal-important.html',
-        controller: 'personalImportant',
-        controllerAs: 'pi'
+        templateUrl: 'app/views/personal-normal.html',
+        controller: 'personalNormal',
+        controllerAs: 'pn'
       }, {
         group: '个人资源管理',
         groupIco: 'icon-puzzle-piece',
