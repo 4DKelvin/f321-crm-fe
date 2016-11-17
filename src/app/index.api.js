@@ -67,8 +67,54 @@
           password: password
         })
       },
+      system$enum: function (enumName) {
+        return this.base.get('system/enum', {
+          enumName: enumName
+        })
+      },
+      enum$warehouse$type: function () {
+        return this.system$enum('WarehouseType');
+      },
+      enum$train$column: function () {
+        return this.system$enum('TrainColumn');
+      },
+      enum$kac$level: function () {
+        return this.system$enum('KacLevel');
+      },
+      enum$intention$Type: function () {
+        return this.system$enum('IntentionType');
+      },
+      enum$giveup$reason: function () {
+        return this.system$enum('GiveUpReason');
+      },
+      enum$customer$operate$type: function () {
+        return this.system$enum('CustomerOperateType');
+      },
+      enum$customer$giveup$type: function () {
+        return this.system$enum('CustomerGiveUpType');
+      },
+      enum$customer$conflict$type: function () {
+        return this.system$enum('CustomerConflictType');
+      },
+      enum$customer$attribute$type: function () {
+        return this.system$enum('CustomerAttributeType');
+      },
+      system$dictionary: function (dictionaryType) {
+        return this.base.get('system/dictionary', {
+          dictionaryType: dictionaryType
+        })
+      },
+      dict$loc: function () {
+        return this.system$dictionary('loc')
+      },
       peronal$normal: function (params) {
         return this.base.post('customer/my/page', this.convert(params));
+      },
+      peronal$ts: function (params) {
+        return this.base.post('customer/ts', this.convert(params));
+      },
+      customer$info: function (customerId) {
+        return this.base.get('customer/' + customerId);
       }
     };
   }

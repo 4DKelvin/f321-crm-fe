@@ -7,9 +7,7 @@
     .constant('moment', moment)
     .constant('common_url', [
       {
-        group: '公共模块',
         groupIco: 'icon-default',
-        text: '登录',
         key: 'login',
         url: '/login',
         cache: false,
@@ -18,15 +16,24 @@
         controllerAs: 'login'
       },
       {
-        group: '公共模块',
         groupIco: 'icon-default',
-        text: '首页',
         key: 'home',
         url: '/',
         cache: false,
         templateUrl: 'app/views/common-home.html',
         controller: 'home',
         controllerAs: 'home'
+      },
+      {
+        group: '客户资源管理',
+        groupIco: 'icon-user',
+        text: '客户详情',
+        key: 'customer',
+        url: '/customer/:id',
+        cache: false,
+        templateUrl: 'app/views/global-customer.html',
+        controller: 'globalCustomer',
+        controllerAs: 'gc'
       }
     ])
     .constant('short_url', [
@@ -87,9 +94,6 @@
         key: 'p-important',
         url: '/personal/important',
         cache: false,
-        templateUrl: 'app/views/personal-normal.html',
-        controller: 'personalNormal',
-        controllerAs: 'pn'
       }, {
         group: '个人资源管理',
         groupIco: 'icon-puzzle-piece',
@@ -107,9 +111,9 @@
         key: 'p-continues-ts',
         url: '/personal/continues-ts',
         cache: false,
-        templateUrl: 'app/views/personal-continues-ts.html',
-        controller: 'personalContinuesTs',
-        controllerAs: 'pcts'
+        templateUrl: 'app/views/personal-normal-ts.html',
+        controller: 'personalNormalTs',
+        controllerAs: 'pnts'
       }, {
         group: '个人资源管理',
         groupIco: 'icon-puzzle-piece',
@@ -137,9 +141,9 @@
         key: 'g-conflict',
         url: '/global/conflict',
         cache: false,
-        templateUrl: 'app/views/global-conflict.html',
-        controller: 'globalConflict',
-        controllerAs: 'gc'
+        templateUrl: 'app/views/personal-normal.html',
+        controller: 'personalNormal',
+        controllerAs: 'pn'
       }, {
         group: '公共资源管理',
         groupIco: 'icon-globe',
@@ -147,9 +151,9 @@
         key: 'g-commons',
         url: '/global/commons',
         cache: false,
-        templateUrl: 'app/views/global-commons.html',
-        controller: 'globalCommons',
-        controllerAs: 'gcs'
+        templateUrl: 'app/views/personal-normal.html',
+        controller: 'personalNormal',
+        controllerAs: 'pn'
       }, {
         group: '公共资源管理',
         groupIco: 'icon-globe',
@@ -157,9 +161,9 @@
         key: 'g-receive',
         url: '/global/receive',
         cache: false,
-        templateUrl: 'app/views/global-receive.html',
-        controller: 'globalReceive',
-        controllerAs: 'gr'
+        templateUrl: 'app/views/personal-normal.html',
+        controller: 'personalNormal',
+        controllerAs: 'pn'
       }, {
         group: '公共资源管理',
         groupIco: 'icon-globe',

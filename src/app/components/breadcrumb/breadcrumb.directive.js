@@ -5,7 +5,7 @@
     .directive('aceBreadcrumb', aceBreadcrumb);
   document.createElement('ace-breadcrumb');
   /** @ngInject */
-  function aceBreadcrumb($location, short_url) {
+  function aceBreadcrumb($state, short_url, common_url) {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/breadcrumb/breadcrumb.html',
@@ -18,19 +18,24 @@
           icon: 'icon-home',
           url: '/'
         }];
-        vm.reload = function(){
+        vm.reload = function () {
           window.location.reload();
         };
-        for (var i = 0; i < short_url.length; i++) {
-          if ($location.$$url == short_url[i].url) {
-            vm.links.push({
-              name: short_url[i].group,
-              icon: short_url[i].groupIco
-            });
-            vm.links.push({
-              name: short_url[i].text,
-              url: short_url[i].url
-            });
+        var arr = short_url.concat(common_url);
+        for (var i = 0; i < arr.length; i++) {
+          if ($state.current.key == arr[i].key) {
+            if (arr[i].group) {
+              vm.links.push({
+                name: arr[i].group,
+                icon: arr[i].groupIco
+              });
+            }
+            if (arr[i].text) {
+              vm.links.push({
+                name: arr[i].text,
+                url: arr[i].url
+              });
+            }
           }
         }
       },
