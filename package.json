@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "dependencies": {},
   "scripts": {
-    "release": "gulp && release.js"
+    "release": "gulp && node release.js"
   },
   "devDependencies": {
     "estraverse": "~4.1.0",
