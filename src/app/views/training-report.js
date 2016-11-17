@@ -3,6 +3,6 @@
 
   angular
     .module('f321CrmFe')
-    .controller('trainingText', function(){
+    .controller('trainingReport', function(){
     });
 })();

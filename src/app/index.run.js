@@ -25,4 +25,5 @@
       $('[data-rel=tooltip]').tooltip();
     });
   }
+
 })();

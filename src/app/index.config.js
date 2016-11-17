@@ -27,6 +27,5 @@
     // Use raw Content-Type
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
     $httpProvider.defaults.headers.put['Content-Type'] = 'application/json';
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
   }
 })();

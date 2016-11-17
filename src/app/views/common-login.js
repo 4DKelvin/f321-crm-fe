@@ -13,9 +13,9 @@
         return toastr.warning('请输入你的账号和密码', '警告');
       }
       f321Api.login(vm.account, vm.password).then(function (res) {
-        $cookies.set('profile', JSON.stringify(res));
+        $cookies.put('profile', JSON.stringify(res));
         if (vm.autoLogin) {
-          $cookies.set('autoLogin', vm.autoLogin);
+          $cookies.put('autoLogin', vm.autoLogin);
         } else {
           $cookies.remove('autoLogin');
         }

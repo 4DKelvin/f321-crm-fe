@@ -11,7 +11,7 @@
       templateUrl: 'app/components/navbar/navbar.html',
       scope: {},
       /** @ngInject */
-      controller: function ($state, $cookies) {
+      controller: function ($state, $cookies,toastr) {
         var vm = this;
         vm.messages = [
           {
@@ -35,7 +35,9 @@
         ];
         vm.logout = function () {
           $cookies.remove('profile');
+          $cookies.remove('autoLogin');
           $state.go('login');
+          return toastr.info('你已经安全退出', '操作成功');
         }
       },
       controllerAs: 'bar',

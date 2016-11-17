@@ -31,10 +31,8 @@
       $log.debug(options);
       $http(options).success(function (data) {
         $log.debug(data);
-        if (data.code == "200") {
+        if (data.status == "200") {
           deferred.resolve(data.content);
-        } else if (data.code == '500') {
-          //登录失效
         } else {
           deferred.reject(data.message);
         }
@@ -60,11 +58,17 @@
           return request(path, params, 'DELETE');
         }
       },
+      convert: function (params) {
+        return $.parseJSON(JSON.stringify(params));
+      },
       login: function (account, password) {
         return this.base.post('login', {
           account: account,
           password: password
         })
+      },
+      peronal$normal: function (params) {
+        return this.base.post('customer/my/page', this.convert(params));
       }
     };
   }

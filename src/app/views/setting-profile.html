@@ -15,8 +15,8 @@
                 <label class="col-sm-3 control-label no-padding-right" for="form-input-readonly-count"> 账号 </label>
 
                 <div class="col-sm-9">
-                  <input readonly="" type="text" class="col-xs-10 col-sm-5" id="form-input-readonly-count"
-                         value="admin-f321"/>
+                  <input readonly type="text" class="col-xs-10 col-sm-5" id="form-input-readonly-count"
+                         ng-model="profile.account"/>
                 </div>
               </div>
               <div class="space-4"></div>
@@ -25,7 +25,7 @@
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-name"> 真实姓名 </label>
 
                 <div class="col-sm-9">
-                  <input type="text" class="col-xs-10 col-sm-5" id="form-field-name"/>
+                  <input type="text" class="col-xs-10 col-sm-5" id="form-field-name" ng-model="profile.info.realname"/>
 											<span class="help-inline col-xs-12 col-sm-7 pt4">
 												<b class="middle red"> * </b>
 											</span>
@@ -37,7 +37,7 @@
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-email"> 邮箱 </label>
 
                 <div class="col-sm-9">
-                  <input type="text" class="col-xs-10 col-sm-5" id="form-field-email"/>
+                  <input type="text" class="col-xs-10 col-sm-5" id="form-field-email" ng-model="profile.info.email"/>
 											<span class="help-inline col-xs-12 col-sm-7 pt4">
 												<b class="middle red"> * </b>
 											</span>
@@ -49,7 +49,7 @@
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-qq"> QQ </label>
 
                 <div class="col-sm-9">
-                  <input type="text" class="col-xs-10 col-sm-5" id="form-field-qq"/>
+                  <input type="text" class="col-xs-10 col-sm-5" id="form-field-qq" ng-model="profile.info.qq"/>
 											<span class="help-inline col-xs-12 col-sm-7 pt4">
 												<b class="middle red"> * </b>
 											</span>
@@ -61,7 +61,7 @@
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-mobile"> 手机号 </label>
 
                 <div class="col-sm-9">
-                  <input type="text" class="col-xs-10 col-sm-5" id="form-field-mobile"/>
+                  <input type="text" class="col-xs-10 col-sm-5" id="form-field-mobile" ng-model="profile.info.mobile"/>
 											<span class="help-inline col-xs-12 col-sm-7 pt4">
 												<b class="middle red"> * </b>
 											</span>
@@ -70,12 +70,12 @@
               <div class="space-24"></div>
               <div class="clearfix form-actions">
                 <div class="col-md-offset-3 col-md-9">
-                  <button class="btn btn-info" type="button">
+                  <button class="btn btn-info" type="button" ng-click="profile.submit()">
                     <i class="icon-ok bigger-110"></i>
                     确定
                   </button>
                   &nbsp; &nbsp; &nbsp;
-                  <button class="btn" type="reset">
+                  <button class="btn" ng-click="profile.info = {}">
                     <i class="icon-undo bigger-110"></i>
                     重置
                   </button>
