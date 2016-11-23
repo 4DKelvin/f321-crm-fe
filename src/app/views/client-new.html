@@ -1,4 +1,9 @@
 <ace-navbar></ace-navbar>
+<style type="text/css">
+  .w100 {
+    width: 100px;
+  }
+</style>
 <div class="main-container" id="main-container">
   <div class="main-container-inner">
     <ace-sidebar mini="home.mini"></ace-sidebar>
@@ -8,7 +13,188 @@
         <div class="row">
           <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->
+            <form class="form-horizontal" role="form">
+              <fieldset>
+                <div class="widget-box transparent">
+                  <div class="widget-header">
+                    <h4>客户信息</h4>
+                  </div>
+                  <div class="widget-body">
+                    <div class="widget-main no-padding-right no-padding-left">
+                      <table class="table table-bordered no-margin-bottom">
+                        <tbody>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>客户名</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="cn.params.name"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>品牌</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="cn.params.brand"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>关键字</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="cn.params.keyword"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>行业</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="cn.params.industry"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>地址</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="cn.params.address"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>网站</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="cn.params.website"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>简介</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="cn.params.intro"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>重要程度</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="cn.params.intention"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>来源</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="cn.params.source"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>修改依据</label>
+                          </td>
+                          <td class="align-middle">
+                            <textarea class="form-control"></textarea>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <!-- 客户联系人 -->
+                <div class="space-10"></div>
+                <div class="widget-box transparent">
+                  <div class="widget-header">
+                    <h4>客户联系人</h4>
 
+                    <div class="widget-toolbar no-border">
+                      <a class="tooltip-info" ng-click="cn.addContact()" title="添加"
+                         data-action="settings">
+                        <i class="icon-plus"></i>
+                      </a>
+                      <a data-action="collapse">
+                        <i class="icon-chevron-up"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="widget-body">
+                    <div class="widget-main no-padding-right no-padding-left">
+                      <table class="table table-striped table-bordered table-hover no-margin-bottom">
+                        <thead>
+                        <tr>
+                          <th class="center nowrap">姓名</th>
+                          <th class="center nowrap">手机</th>
+                          <th class="hidden-480 center nowrap">性别</th>
+                          <th class="hidden-480 center nowrap">办公电话</th>
+                          <th class="hidden-480 center nowrap">传真</th>
+                          <th class="hidden-480 center nowrap">邮件</th>
+                          <th class="hidden-480 center nowrap">主要</th>
+                          <th class="center nowrap">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="contact in cn.params.crmContactList">
+                          <td class="center align-middle nowrap">
+                            <input ng-model="contact.name" class="w100" type="text"/>
+                          </td>
+                          <td class="center align-middle nowrap">
+                            <input ng-model="contact.mobile" class="w100" type="tel"/>
+                          </td>
+                          <td class="hidden-480 center align-middle nowrap">
+                            <label ng-click="contact.sex=1">
+                              <input type="radio" name="sex" ng-checked="contact.sex==1"/> 女
+                            </label>
+                            <label ng-click="contact.sex=2">
+                              <input type="radio" name="sex" ng-checked="contact.sex==2"/> 男
+                            </label>
+                          </td>
+                          <td class="hidden-480 align-middle">
+                            <input ng-model="contact.tel" type="tel"/>
+                          </td>
+                          <td class="hidden-480 align-middle">
+                            <input ng-model="contact.fax" type="tel"/>
+                          </td>
+                          <td class="hidden-480 align-middle">
+                            <input ng-model="contact.email" type="text"/>
+                          </td>
+                          <td class="hidden-480 center align-middle nowrap">
+                            <label ng-click="contact.isPrimary=true">
+                              <input type="radio" name="isPrimary" ng-checked="contact.isPrimary = true"/> 是
+                            </label>
+                            <label ng-click="contact.isPrimary=false">
+                              <input type="radio" name="isPrimary" ng-checked="contact.isPrimary = false"/> 否
+                            </label>
+                          </td>
+                          <td class="center align-middle nowrap">
+                            <a class="fn-visit-record-edit red" href="javascript:void(0);"
+                               ng-click="cn.remove(contact)">删除</a>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="space-24"></div>
+                <div class="clearfix form-actions">
+                  <div class="col-md-offset-11 col-md-1">
+                    <button class="btn btn-info" type="button" ng-click="cn.submit()">
+                      <i class="icon-ok bigger-110"></i>
+                      确定
+                    </button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
             <!-- PAGE CONTENT ENDS -->
           </div>
           <!-- /.col -->
@@ -22,3 +208,5 @@
   <!-- /.main-container-inner -->
   <ace-top></ace-top>
 </div><!-- /.main-container -->
+
+

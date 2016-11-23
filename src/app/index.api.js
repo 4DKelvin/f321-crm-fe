@@ -72,6 +72,9 @@
           enumName: enumName
         })
       },
+      customer$save: function (params) {
+        return this.base.post('customer', this.convert(params));
+      },
       enum$warehouse$type: function () {
         return this.system$enum('WarehouseType');
       },
