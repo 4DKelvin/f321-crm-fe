@@ -28,9 +28,7 @@
         method: method,
         cache: false
       }, transferData);
-      $log.debug(options);
       $http(options).success(function (data) {
-        $log.debug(data);
         if (data.status == "200") {
           deferred.resolve(data.content);
         } else {
@@ -74,6 +72,64 @@
       },
       customer$save: function (params) {
         return this.base.post('customer', this.convert(params));
+      },
+      contact$log$save: function (params) {
+        return this.base.post('contactLog', this.convert(params));
+      },
+      contact$log: function (customerId, index, size) {
+        return this.base.post('contactLog/' + customerId + '/page', {
+          index: index,
+          size: size,
+          customerId: customerId
+        })
+      },
+      contact$save: function (params) {
+        return this.base.post('contact', this.convert(params));
+      },
+      contact: function (customerId, index, size) {
+        return this.base.post('contact/' + customerId + '/page', {
+          index: index,
+          size: size,
+          customerId: customerId
+        })
+      },
+      giveup$log: function (customerId, index, size) {
+        return this.base.post('giveupLog/' + customerId + '/page', {
+          index: index,
+          size: size,
+          customerId: customerId
+        })
+      },
+      giveup$save: function (params) {
+        var p = this.convert(params);
+        for (var key in p) {
+          if (p[key].value) {
+            p[key] = p[key].value;
+          }
+        }
+        return this.base.post('customer/giveup', p);
+
+      },
+      operator$log: function (customerId, index, size) {
+        return this.base.post('operatorLog/' + customerId + '/page', {
+          index: index,
+          size: size,
+          customerId: customerId
+        });
+      },
+      set$ts: function (customerIdList, ts, warehouseType) {
+        return this.base.get('customer/setTS', {
+          customerIdList: customerIdList,
+          ts: ts,
+          warehouseType: warehouseType
+        });
+      },
+      set$bat$ts: function (customerIdList, freeTS, warehouseType) {
+        return this.base.get('customer/batchSetTS', {
+          customerIdList: customerIdList,
+          freeTS: freeTS,
+          warehouseType: warehouseType
+        });
       },
       enum$warehouse$type: function () {
         return this.system$enum('WarehouseType');

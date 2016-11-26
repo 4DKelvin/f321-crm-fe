@@ -5,7 +5,7 @@
     .module('f321CrmFe')
     .controller('globalCustomer', globalCustomer);
   /** @ngInject */
-  function globalCustomer($q, f321Api, toastr, $stateParams) {
+  function globalCustomer($q, f321Api, toastr, $stateParams, $scope) {
     var vm = this;
     vm.getData = function () {
       var defer = $q.defer(),
@@ -118,6 +118,8 @@
             return log;
           });
         }
+        result.info.crmContactNew = [];
+        result.info.crmContactLogNew = [];
         defer.resolve(result);
       }, function (err) {
         defer.reject(err);
@@ -127,10 +129,91 @@
 
     vm.getData(vm.params).then(function (res) {
       vm.info = res.info;
+      vm.giveupReason = res.giveupReason;
+      vm.giveupType = res.giveupType;
+      vm.conflictType = res.conflictType;
       vm.warehouseType = res.warehouseType;
       vm.intentionType = res.intentionType;
     }, function (err) {
       toastr.error(err, '出错')
     });
+
+    vm.saveGiveup = function(giveup){
+      giveup.customerId = $stateParams.id;
+      f321Api.giveup$save(giveup).then(function (res) {
+        f321Api.giveup$log($stateParams.id, vm.info.crmGiveupLog.page, vm.info.crmGiveupLog.size).then(function (res) {
+          vm.info.crmGiveupLogList = res.pageContent;
+          vm.info.crmGiveupLog.total = res.total;
+        }, function (err) {
+          toastr.error(err, '出错');
+        });
+        toastr.success('放弃客户成功!', '操作成功');
+        giveup = false;
+      }, function (err) {
+        toastr.error(err, '出错');
+      });
+    };
+    vm.saveLog = function (log) {
+      log.contactDt = new Date().toDateString();
+      f321Api.contact$log$save(log).then(function (res) {
+        f321Api.contact$log($stateParams.id, vm.info.crmContactLog.page, vm.info.crmContactLog.size).then(function (res) {
+          vm.info.crmContactLogList = res.pageContent;
+          vm.info.crmContactLog.total = res.total;
+        }, function (err) {
+          toastr.error(err, '出错');
+        });
+        toastr.success('添加成功!', '操作成功');
+        log = false;
+      }, function (err) {
+        toastr.error(err, '出错');
+      });
+    };
+
+    vm.saveContact = function (contact) {
+      contact.customerId = $stateParams.id;
+      f321Api.contact$save(contact).then(function (res) {
+        f321Api.contact($stateParams.id, 1, 100).then(function (res) {
+          vm.info.crmContactList = res;
+        }, function (err) {
+          toastr.error(err, '出错');
+        });
+        toastr.success('添加成功!', '操作成功');
+        vm.info.crmContactNew.splice(vm.info.crmContactNew.indexOf(contact), 1);
+      }, function (err) {
+        toastr.error(err, '出错');
+      });
+    };
+
+    $scope.$watch('gc.info.crmContactLog.page', function () {
+      if (vm.info) {
+        f321Api.contact$log($stateParams.id, vm.info.crmContactLog.page, vm.info.crmContactLog.size).then(function (res) {
+          vm.info.crmContactLogList = res.pageContent;
+          vm.info.crmContactLog.total = res.total;
+        }, function (err) {
+          toastr.error(err, '出错');
+        })
+      }
+    });
+
+    $scope.$watch('gc.info.crmGiveupLog.page', function () {
+      if (vm.info) {
+        f321Api.giveup$log($stateParams.id, vm.info.crmGiveupLog.page, vm.info.crmGiveupLog.size).then(function (res) {
+          vm.info.crmGiveupLogList = res.pageContent;
+          vm.info.crmGiveupLog.total = res.total;
+        }, function (err) {
+          toastr.error(err, '出错');
+        })
+      }
+    }, true);
+    $scope.$watch('gc.info.crmOperatorLog.page', function () {
+      if (vm.info) {
+        f321Api.operator$log($stateParams.id, vm.info.crmOperatorLog.page, vm.info.crmOperatorLog.size).then(function (res) {
+          vm.info.crmOperatorLogList = res.pageContent;
+          vm.info.crmOperatorLog.total = res.total;
+        }, function (err) {
+          toastr.error(err, '出错');
+        })
+      }
+    }, true);
   }
 })();

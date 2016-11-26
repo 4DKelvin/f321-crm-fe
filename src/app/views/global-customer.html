@@ -1,4 +1,23 @@
 <ace-navbar></ace-navbar>
+<style type="text/css">
+  .w100 {
+    width: 100px;
+  }
+
+  .widget-box {
+    position: relative;
+  }
+
+  .logTemplate {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: white;
+    z-index: 999;
+  }
+</style>
 <div class="main-container" id="main-container">
   <div class="main-container-inner">
     <ace-sidebar mini="home.mini"></ace-sidebar>
@@ -10,11 +29,189 @@
             <!-- 客户基本信息 -->
             <div class="space-6"></div>
             <div class="widget-box transparent">
+              <!-- -->
+              <div class="logTemplate" ng-if="gc.giveup">
+
+                <div class="widget-box transparent">
+                  <div class="widget-header">
+                    <h4>放弃客户</h4>
+                  </div>
+                  <div class="widget-body">
+                    <div class="widget-main no-padding-right no-padding-left">
+                      <form class="form-horizontal" role="form">
+                        <fieldset>
+                          <table class="table table-bordered no-margin-bottom">
+                            <tbody>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>客户名称</label>
+                              </td>
+                              <td class="align-middle">
+                                <input type="text" readonly ng-model="gc.info.crmCustomerVo.name"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>放弃类型</label>
+                              </td>
+                              <td class="align-middle" ng-init="gc.giveup.type = gc.giveupType[0]">
+                                <select ng-model="gc.giveup.type"
+                                        ng-options="type as type.name for type in gc.giveupType track by type.value"></select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>放弃原因描述</label>
+                              </td>
+                              <td class="align-middle">
+                                <textarea class="form-control" ng-model="gc.giveup.reason"></textarea></td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>放弃量化原因</label>
+                              </td>
+                              <td class="align-middle" ng-init="gc.giveup.reasonId = gc.giveupReason[0]">
+                                <select ng-model="gc.giveup.reasonId"
+                                        ng-options="type as type.name for type in gc.giveupReason track by type.value"></select>
+                              </td>
+                            </tr>
+                            <tr ng-if="gc.giveupReason[gc.giveupReason.length-1].value == gc.giveup.reasonId.value">
+                              <td class="align-middle nowrap align-right">
+                                <label>冲突客户ID</label>
+                              </td>
+                              <td class="align-middle">
+                                <input type="text" ng-model="gc.giveup.conflictCustomerSn"/>
+                              </td>
+                            </tr>
+                            <tr ng-if="gc.giveupReason[gc.giveupReason.length-1].value == gc.giveup.reasonId.value">
+                              <td class="align-middle nowrap align-right">
+                                <label>冲突类型</label>
+                              </td>
+                              <td class="align-middle" ng-init="gc.giveup.conflictType = gc.conflictType[0]">
+                                <select ng-model="gc.giveup.conflictType"
+                                        ng-options="type as type.name for type in gc.conflictType track by type.value"></select>
+                              </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                              <td></td>
+                              <td>
+                                <a class="btn btn-danger" type="button" ng-click="gc.saveGiveup(gc.giveup)"> 提交</a>
+                                <a class="btn btn-info" type="button" ng-click="gc.giveup=false"> 取消</a>
+                              </td>
+                            </tr>
+                            </tfoot>
+                          </table>
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- -->
+              <div class="logTemplate" ng-if="gc.modify">
+
+                <div class="widget-box transparent">
+                  <div class="widget-header">
+                    <h4>申请资料修改</h4>
+                  </div>
+                  <div class="widget-body">
+                    <div class="widget-main no-padding-right no-padding-left">
+                      <form class="form-horizontal" role="form">
+                        <fieldset>
+                          <table class="table table-bordered no-margin-bottom">
+                            <tbody>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>客户原始名</label>
+                              </td>
+                              <td class="align-middle">
+                                <input type="text" value="东莞诺华家具有限公司"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>申请人</label>
+                              </td>
+                              <td class="align-middle">
+                                <input type="text" value="许先生"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>申请属性</label>
+                              </td>
+                              <td class="align-middle">
+                                <select size="1">
+                                  <option value="1" selected="selected">CRM系统客户名称</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>申请状态</label>
+                              </td>
+                              <td class="align-middle">
+                                <select size="1">
+                                  <option value="1" selected="selected">申请中</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>申请时间</label>
+                              </td>
+                              <td class="align-middle">
+                                <input type="text" value="2016-08-22"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>原始值</label>
+                              </td>
+                              <td class="align-middle">
+                                <input type="text"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>目标值</label>
+                              </td>
+                              <td class="align-middle">
+                                <input type="text"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>修改依据</label>
+                              </td>
+                              <td class="align-middle">
+                                <textarea class="form-control"></textarea>
+                              </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                              <td></td>
+                              <td>
+                                <a class="btn btn-danger" type="button"> 提交</a>
+                                <a class="btn btn-info" type="button" ng-click="gc.modify=false"> 取消</a>
+                              </td>
+                            </tr>
+                            </tfoot>
+                          </table>
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="widget-header">
                 <h4>客户基本信息 <span class="red align-middle">TS=[4]; T=[1]; TS-T=[3]</span></h4>
 
                 <div class="widget-toolbar no-border">
-                  <a href="#" data-action="collapse">
+                  <a href="javascript:void(0);" data-action="collapse">
                     <i class="icon-chevron-up"></i>
                   </a>
                 </div>
@@ -130,9 +327,11 @@
                         <button class="btn btn-primary" type="button"> TS设置</button>
                         <button class="btn btn-inverse" type="button"> 设为重点客户</button>
                         <button class="btn btn-grey" type="button"> 取消重点客户</button>
-                        <button class="btn btn-warning" type="button"> 放弃客户</button>
+                        <button class="btn btn-warning" ng-click="gc.giveup={}" type="button"
+                                ng-if="gc.info.crmCustomerVo.warehouse.value!=3"> 放弃客户
+                        </button>
                         <button class="btn btn-pink" type="button"> 约会</button>
-                        <button class="btn btn-danger" id="fnApplyInfoEdit" type="button"> 申请资料修改</button>
+                        <button class="btn btn-danger" ng-click="gc.modify={}" type="button"> 申请资料修改</button>
                         <button class="btn btn-info" type="button"> 保存修改</button>
                         <button class="btn" type="reset"> 重置</button>
                       </div>
@@ -148,15 +347,12 @@
                 <h4>客户联系人</h4>
 
                 <div class="widget-toolbar no-border">
-                  <a class="tooltip-info" href="#" data-rel="tooltip" data-placement="bottom" title="添加"
+                  <a class="tooltip-info" href="javascript:void(0);" data-rel="tooltip" data-placement="bottom"
+                     title="添加" ng-click="gc.info.crmContactNew.push({})"
                      data-action="settings">
                     <i class="icon-plus"></i>
                   </a>
-                  <a class="tooltip-success" href="#" data-rel="tooltip" data-placement="bottom" title="刷新"
-                     data-action="reload">
-                    <i class="icon-refresh"></i>
-                  </a>
-                  <a href="#" data-action="collapse">
+                  <a href="javascript:void(0);" data-action="collapse">
                     <i class="icon-chevron-up"></i>
                   </a>
                 </div>
@@ -177,6 +373,42 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tr ng-repeat="contact in gc.info.crmContactNew">
+                      <td class="center align-middle nowrap">
+                        <input class="w100" type="text" ng-model="contact.name"/>
+                      </td>
+                      <td class="center align-middle nowrap">
+                        <input class="w100" type="tel" ng-model="contact.mobile"/>
+                      </td>
+                      <td class="hidden-480 center align-middle nowrap">
+                        <label ng-click="contact.sex=1"><input type="radio" name="sex[{{$index}}]"
+                                                               ng-checked="contact.sex==1"/> 女</label>
+                        <label ng-click="contact.sex=2"><input type="radio" name="sex[{{$index}}]"
+                                                               ng-checked="contact.sex==2"/> 男</label>
+                      </td>
+                      <td class="hidden-480 align-middle">
+                        <input class="w100" type="tel" ng-model="contact.tel"/>
+                      </td>
+                      <td class="hidden-480 align-middle">
+                        <input class="" type="text" ng-model="contact.fax"/>
+                      </td>
+                      <td class="hidden-480 align-middle">
+                        <input class="" type="text" ng-model="contact.email"/>
+                      </td>
+                      <td class="hidden-480 center align-middle nowrap">
+                        <label ng-click="contact.isPrimary=true"><input type="radio" name="isPrimary[{{$index}}]"
+                                                                        ng-checked="contact.isPrimary"/> 是</label>
+                        <label ng-click="contact.isPrimary=false"><input type="radio" name="isPrimary[{{$index}}]"
+                                                                         ng-checked="!contact.isPrimary"/> 否</label>
+                      </td>
+                      <td class="center align-middle nowrap">
+                        <a class="fn-visit-record-edit red"
+                           href="javascript:void(0);"
+                           ng-click="gc.saveContact(contact)">保存</a>
+                        <a class="fn-visit-record-edit red"
+                           href="javascript:void(0);"
+                           ng-click="gc.info.crmContactNew.splice($index,1)">取消</a></td>
+                    </tr>
                     <tr ng-repeat="contact in gc.info.crmContactList">
                       <td class="center align-middle nowrap" ng-bind="contact.name"></td>
                       <td class="center align-middle nowrap" ng-bind="contact.mobile"></td>
@@ -186,27 +418,128 @@
                       <td class="hidden-480 align-middle" ng-bind="contact.email"></td>
                       <td class="hidden-480 center align-middle" ng-bind="contact.isPrimary?'是':'否'"></td>
                       <td class="center align-middle nowrap"><a class="fn-visit-record-edit red"
-                                                                data-id="fnVisitRecordEdit_01"
+                                                                ng-click="gc.addLog={linkmanId:contact.name}"
                                                                 href="javascript:void(0);">填写拜访记录</a></td>
                     </tr>
                     <!-- -->
                     </tbody>
                   </table>
+                  <div class="logTemplate" ng-if="gc.addLog">
+                    <div class="widget-box transparent">
+                      <div class="widget-header">
+                        <h4>录入拜访记录</h4>
+                      </div>
+                      <div class="widget-body">
+                        <div class="widget-main no-padding-right no-padding-left">
+                          <form class="form-horizontal" role="form">
+                            <fieldset>
+                              <table class="table table-bordered no-margin-bottom">
+                                <tbody>
+                                <tr>
+                                  <td class="align-middle nowrap align-right">
+                                    <label>客户名称</label>
+                                  </td>
+                                  <td class="align-middle">
+                                    <input type="text" readonly ng-model="gc.info.crmCustomerVo.name"/>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="align-middle nowrap align-right">
+                                    <label>客户联系人</label>
+                                  </td>
+                                  <td class="align-middle">
+                                    <input type="text" readonly ng-model="gc.addLog.linkmanId"/>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="align-middle nowrap align-right">
+                                    <label>通话类型</label>
+                                  </td>
+                                  <td class="align-middle">
+                                    <label ng-click="gc.addLog.callType='呼入'">
+                                      <input name="callType" type="radio" class="ace"
+                                             ng-checked="gc.addLog.callType=='呼入'"/>
+                                      <span class="lbl"> 呼入</span>
+                                    </label>&emsp;
+                                    <label ng-click="gc.addLog.callType='呼出'">
+                                      <input name="callType" type="radio" class="ace"
+                                             ng-checked="gc.addLog.callType=='呼出'"/>
+                                      <span class="lbl"> 呼出</span>
+                                    </label>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="align-middle nowrap align-right">
+                                    <label>通话内容</label>
+                                  </td>
+                                  <td class="align-middle">
+                                    <textarea class="form-control" ng-model="gc.addLog.contactDesc"></textarea>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="align-middle nowrap align-right">
+                                    <label>录音编码</label>
+                                  </td>
+                                  <td class="align-middle">
+                                    <input type="text" ng-model="gc.addLog.sn"/>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="align-middle nowrap align-right">
+                                    <label>录音文件路径</label>
+                                  </td>
+                                  <td class="align-middle">
+                                    <input type="text" ng-model="gc.addLog.file"/>
+                                  </td>
+                                </tr>
+                                <tr ng-if="false">
+                                  <td class="align-middle nowrap align-right">
+                                    <label>约会设置</label>
+                                  </td>
+                                  <td class="align-middle">
+                                    <label>
+                                      <input name="dateSetting" type="checkbox" class="ace"/>
+                                      <span class="lbl"> 约会</span>
+                                    </label>&emsp;
+                                    <select size="1">
+                                      <option value="1" selected="selected">一般</option>
+                                    </select>&emsp;
+                                    <input type="text"/>
+                                  </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                  <td></td>
+                                  <td>
+                                    <a class="btn btn-danger" type="button" ng-click="gc.saveLog(gc.addLog)"> 保存</a>
+                                    <a class="btn btn-info" type="button" ng-click="gc.addLog=false"> 取消</a>
+                                  </td>
+                                </tr>
+                                </tfoot>
+                              </table>
+                            </fieldset>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <!-- 拜访记录 -->
             <div class="space-10"></div>
-            <div class="widget-box transparent" ng-if="gc.info.crmContactLogList">
+            <div class="widget-box transparent">
               <div class="widget-header">
-                <h4>最新15条拜访记录</h4>
+                <h4>拜访记录</h4>
 
                 <div class="widget-toolbar no-border">
-                  <a class="tooltip-info" href="#" data-rel="tooltip" data-placement="bottom" title="所有"
+                  <a class="tooltip-info" href="javascript:void(0);" data-rel="tooltip" data-placement="bottom"
+                     title="所有" ng-click="gc.info.crmContactLog = {page:1,size:10}" ng-if="!gc.info.crmContactLog"
                      data-action="settings">
                     <i class="icon-tasks"></i>
                   </a>
-                  <a href="#" data-action="collapse">
+                  <a href="javascript:void(0);" data-action="collapse">
                     <i class="icon-chevron-up"></i>
                   </a>
                 </div>
@@ -229,22 +562,30 @@
                       <td class="hidden-480 align-middle" ng-bind="log.callType"></td>
                       <td class="hidden-480 align-middle" ng-bind="log.contactDesc"></td>
                       <td class="center align-middle nowrap" ng-bind="log.contactDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
-                      <td class="center align-middle nowrap"><a class="red" href="#">修改录音</a></td>
+                      <td class="center align-middle nowrap"><a class="red" href="javascript:void(0);">修改录音</a></td>
                     </tr>
                     <!-- -->
                     </tbody>
                   </table>
+                  <ace-pager ng-if="gc.info.crmContactLog" index="gc.info.crmContactLog.page"
+                             size="gc.info.crmContactLog.size" count="gc.info.crmContactLog.total"
+                             len="gc.info.crmContactLogList.length"></ace-pager>
                 </div>
               </div>
             </div>
             <!-- 放弃记录 -->
             <div class="space-10"></div>
-            <div class="widget-box transparent" ng-if="gc.info.crmGiveupLogList">
+            <div class="widget-box transparent">
               <div class="widget-header">
                 <h4>放弃记录</h4>
 
                 <div class="widget-toolbar no-border">
-                  <a href="#" data-action="collapse">
+                  <a class="tooltip-info" href="javascript:void(0);" data-rel="tooltip" data-placement="bottom"
+                     title="所有" ng-click="gc.info.crmGiveupLog = {page:1,size:10}" ng-if="!gc.info.crmGiveupLog"
+                     data-action="settings">
+                    <i class="icon-tasks"></i>
+                  </a>
+                  <a href="javascript:void(0);" data-action="collapse">
                     <i class="icon-chevron-up"></i>
                   </a>
                 </div>
@@ -272,17 +613,28 @@
                     <!-- -->
                     </tbody>
                   </table>
+                  <ace-pager ng-if="gc.info.crmGiveupLog"
+                             index="gc.info.crmGiveupLog.page"
+                             size="gc.info.crmGiveupLog.size"
+                             count="gc.info.crmGiveupLog.total"
+                             len="gc.info.crmGiveupLogList.length">
+                  </ace-pager>
                 </div>
               </div>
             </div>
             <!-- 操作记录 -->
             <div class="space-10"></div>
-            <div class="widget-box transparent" ng-if="gc.info.crmOperatorLogList">
+            <div class="widget-box transparent">
               <div class="widget-header">
                 <h4>操作记录</h4>
 
                 <div class="widget-toolbar no-border">
-                  <a href="#" data-action="collapse">
+                  <a class="tooltip-info" href="javascript:void(0);" data-rel="tooltip" data-placement="bottom"
+                     title="所有" ng-click="gc.info.crmOperatorLog = {page:1,size:10}" ng-if="!gc.info.crmOperatorLog"
+                     data-action="settings">
+                    <i class="icon-tasks"></i>
+                  </a>
+                  <a href="javascript:void(0);" data-action="collapse">
                     <i class="icon-chevron-up"></i>
                   </a>
                 </div>
@@ -315,53 +667,15 @@
                       <!-- /.timeline-container -->
                     </div>
                   </div>
+                  <ace-pager ng-if="gc.info.crmOperatorLog"
+                             index="gc.info.crmOperatorLog.page"
+                             size="gc.info.crmOperatorLog.size"
+                             count="gc.info.crmOperatorLog.total"
+                             len="gc.info.crmOperatorLogList.length">
+                  </ace-pager>
                 </div>
               </div>
             </div>
-            <!-- 成交记录 -->
-            <div class="space-10"></div>
-            <div class="widget-box transparent">
-              <div class="widget-header">
-                <h4>成交记录</h4>
-
-                <div class="widget-toolbar no-border">
-                  <a href="#" data-action="collapse">
-                    <i class="icon-chevron-up"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="widget-body">
-                <div class="widget-main no-padding-right no-padding-left">
-                  <table class="table table-striped table-bordered table-hover no-margin-bottom">
-                    <thead>
-                    <tr>
-                      <th class="center nowrap">合同编号</th>
-                      <th class="hidden-480 center nowrap">合同名</th>
-                      <th class="center nowrap">金额</th>
-                      <th class="hidden-480 center nowrap">到账时间</th>
-                      <th class="hidden-480 center nowrap">合同开始时间</th>
-                      <th class="hidden-480 center nowrap">合同结束时间</th>
-                      <th class="hidden-480 center nowrap">成交业务员</th>
-                      <th class="center nowrap">状态</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td class="center align-middle nowrap"></td>
-                      <td class="hidden-480 align-middle"></td>
-                      <td class="align-middle"></td>
-                      <td class="hidden-480 center align-middle">2016-08-22 11:24:30</td>
-                      <td class="hidden-480 center align-middle">2016-08-22 11:24:30</td>
-                      <td class="hidden-480 center align-middle">2016-08-22 11:24:30</td>
-                      <td class="hidden-480 center align-middle nowrap">许先生</td>
-                      <td class="center align-middle nowrap green">正常</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <!-- -->
           </div>
         </div>
       </div>

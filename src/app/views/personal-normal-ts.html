@@ -16,17 +16,17 @@
                 <div class="row">
                   <div class="col-sm-7">
                     <label>
-                      <input class="width-20" type="text"/> &le; TS - T &le; <input class="width-20" type="text"/>&emsp;
-                      关键字：<input class="width-20" type="text"/>&ensp;
-                      <button type="button" class="btn btn-primary btn-xs">搜索</button>
+                      <input class="width-20" ng-model="pnts.params.minFreeTs" type="text"/> &le; TS - T &le;
+                      <input class="width-20" ng-model="pnts.params.maxFreeTs" type="text"/>&emsp;
+                      <button type="button" class="btn btn-primary btn-xs" ng-click="pnts.search()">搜索</button>
                     </label>
                   </div>
                   <div class="col-sm-5">
                     <div class="input-group pull-right">
                       <label>
                         TS - T =
-                        <input type="text"/>
-                        <button type="button" class="btn btn-primary btn-xs">批量调整TS</button>
+                        <input type="text" ng-model="pnts.params.ts"/>
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="pnts.bat()">批量调整TS</button>
                       </label>
                     </div>
                   </div>
@@ -37,8 +37,8 @@
                 <thead>
                 <tr>
                   <th class="nowrap">
-                    <label>
-                      <input type="checkbox" class="ace" name="clientType"/>
+                    <label ng-click="pnts.checked()">
+                      <input type="checkbox" class="ace" name="clientType" ng-checked="pnts.isCheckedAll()"/>
                       <span class="lbl"> 客户编号</span>
                     </label>
                   </th>
@@ -50,72 +50,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr ng-repeat="item in pnts.list">
                   <td class="nowrap align-middle">
-                    <label>
-                      <input type="checkbox" class="ace" name="clientType"/>
-                      <span class="lbl"> JJRCRM6</span>
+                    <label ng-click="item.checked = true">
+                      <input type="checkbox" class="ace" ng-checked="item.checked"/>
+                      <span class="lbl" ng-bind="item.sn"></span>
                     </label>
                   </td>
-                  <td class="nowrap align-middle">东莞诺华家具有限公司</td>
-                  <td class="center nowrap align-middle">56</td>
+                  <td class="nowrap align-middle" ng-bind="item.name"></td>
+                  <td class="center nowrap align-middle" ng-bind="item.lockT"></td>
                   <td class="center nowrap align-middle">
-                    <input class="width-50" type="text" value="59">
+                    <input class="width-50" type="text" ng-model="item.lockTs">
                   </td>
-                  <td class="center nowrap align-middle">3</td>
+                  <td class="center nowrap align-middle" ng-bind="item.lockT - item.lockTs"></td>
                   <td class="center nowrap align-middle">
-                    <button type="button" class="btn btn-info btn-xs">调整TS</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="nowrap align-middle">
-                    <label>
-                      <input type="checkbox" class="ace" name="clientType"/>
-                      <span class="lbl"> JJRCRM129017</span>
-                    </label>
-                  </td>
-                  <td class="nowrap align-middle">东莞诺华家具有限公司</td>
-                  <td class="center nowrap align-middle">56</td>
-                  <td class="center nowrap align-middle">
-                    <input class="width-50" type="text" value="59">
-                  </td>
-                  <td class="center nowrap align-middle">3</td>
-                  <td class="center nowrap align-middle">
-                    <button type="button" class="btn btn-info btn-xs">调整TS</button>
+                    <button type="button" class="btn btn-info btn-xs" ng-click="pnts.saveTs(item)">调整TS</button>
                   </td>
                 </tr>
                 <!-- -->
                 </tbody>
               </table>
-              <!-- -->
-              <div class="table-header no-margin-bottom pt6 pr12 bg-eff3f8 color-393939 border-bottom-dddddd">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <label class="mt6 no-margin-bottom">当前显示 1 到 2 条，共 2 条记录</label>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="pull-right">
-                      <ul class="pagination mt9 no-margin-bottom">
-                        <li class="disabled">
-                          <a href="#">
-                            <i class="icon-double-angle-left"></i>
-                          </a>
-                        </li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                          <a href="#">
-                            <i class="icon-double-angle-right"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

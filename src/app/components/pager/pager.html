@@ -1,8 +1,8 @@
 <div class="table-header no-margin-bottom pt6 pr12 bg-eff3f8 color-393939 border-bottom-dddddd">
   <div class="row">
     <div class="col-sm-6">
-      <label class="mt6 no-margin-bottom">当前显示 <span ng-bind="pager.index * pager.size"></span> 到
-        <span ng-bind="pager.index * pager.size + pager.len"></span> 条，共 <span ng-bind="pager.count"></span> 条记录</label>
+      <label class="mt6 no-margin-bottom">当前显示 <span ng-bind="(pager.index-1) * pager.size + 1"></span> 到
+        <span ng-bind="(pager.index) * pager.size"></span> 条，共 <span ng-bind="pager.count"></span> 条记录</label>
     </div>
     <div class="col-sm-6">
       <div class="pull-right">

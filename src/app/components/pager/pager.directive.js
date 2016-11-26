@@ -19,9 +19,10 @@
       controller: function ($scope, $element, $attrs) {
         $scope.$watch('index', function () {
           $scope.pager.pages = [];
-          var len = Math.ceil($scope.pager.count / $scope.pager.size);
+          var len = Math.ceil(($scope.pager.count || 0) / $scope.pager.size);
           $scope.pager.canNext = $scope.pager.index < len;
-          $scope.pager.canPrev = $scope.pager.index > 0;
+          $scope.pager.canPrev = $scope.pager.index > 1;
+          console.log($scope.pager.count, $scope.pager.size)
           for (var i = 1; i <= len; i++) {
             $scope.pager.pages.push({
               index: i
@@ -35,7 +36,7 @@
         };
         $scope.pager.prev = function () {
           if ($scope.pager.canPrev) {
-            $scope.pager.index += 1;
+            $scope.pager.index -= 1;
           }
         };
       },
