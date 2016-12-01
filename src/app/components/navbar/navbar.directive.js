@@ -13,24 +13,10 @@
       /** @ngInject */
       controller: function ($state, $cookies,toastr) {
         var vm = this;
-        vm.messages = [
-          {
-            type: 'pink',
-            icon: 'lock',
-            text: '密码安全等级太低，请及时设置！',
-            url: '#/'
-          },
-          {
-            type: 'success',
-            icon: 'user',
-            text: '个人资料不够完善，请及时完善！',
-            url: '#/'
-          }
-        ];
         vm.short = [
           {
-            url: '#/',
-            name: '我的约会'
+            url: '#/client/new',
+            name: '新录入新客户'
           }
         ];
         vm.logout = function () {

@@ -4,18 +4,23 @@
     width: 100px;
   }
 
-  .widget-box {
-    position: relative;
+  .logTemplate .widget-box {position: relative;
+    background: white;
+    padding: 10px 30px;
   }
 
   .logTemplate {
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     top: 0;
     background: white;
     z-index: 999;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    background: rgba(0,0,0,.8);
   }
 </style>
 <div class="main-container" id="main-container">

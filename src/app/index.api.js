@@ -118,16 +118,16 @@
         });
       },
       set$ts: function (customerIdList, ts, warehouseType) {
-        return this.base.get('customer/setTS', {
+        return this.base.post('customer/setTS', {
           customerIdList: customerIdList,
           ts: ts,
           warehouseType: warehouseType
         });
       },
       set$bat$ts: function (customerIdList, freeTS, warehouseType) {
-        return this.base.get('customer/batchSetTS', {
+        return this.base.post('customer/batchSetTS', {
           customerIdList: customerIdList,
-          freeTS: freeTS,
+          freeTs: freeTS,
           warehouseType: warehouseType
         });
       },

@@ -21,19 +21,6 @@
             </li>
           </ul>
         </li>
-        <li class="purple">
-          <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">
-            <i class="icon-bell-alt icon-animated-bell"></i>
-            <span class="badge badge-important" ng-bind="bar.messages.length"></span>
-          </a>
-          <ul
-            class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close dropdown-navbar-crm">
-            <li class="dropdown-header"><i class="icon-warning-sign"></i>通知</li>
-            <li ng-repeat="msg in bar.messages"><a ng-href="{{msg.url}}"> <i
-              class="btn btn-xs no-hover btn-{{msg.type}} icon-{{msg.icon}}"></i> <span ng-bind="msg.text"></span> </a>
-            </li>
-          </ul>
-        </li>
         <li class="light-blue">
           <a href="javascript:void(0);" ng-click="bar.logout()"> <i class="icon-signout"></i> <span class="menu-text"> 安全退出 </span>
           </a>

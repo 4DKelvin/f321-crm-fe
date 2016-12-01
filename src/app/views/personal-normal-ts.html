@@ -37,8 +37,8 @@
                 <thead>
                 <tr>
                   <th class="nowrap">
-                    <label ng-click="pnts.checked()">
-                      <input type="checkbox" class="ace" name="clientType" ng-checked="pnts.isCheckedAll()"/>
+                    <label>
+                      <input type="checkbox" class="ace" name="clientType" ng-click="pnts.checkedAll()" ng-checked="pnts.checked"/>
                       <span class="lbl"> 客户编号</span>
                     </label>
                   </th>
@@ -52,9 +52,9 @@
                 <tbody>
                 <tr ng-repeat="item in pnts.list">
                   <td class="nowrap align-middle">
-                    <label ng-click="item.checked = true">
-                      <input type="checkbox" class="ace" ng-checked="item.checked"/>
-                      <span class="lbl" ng-bind="item.sn"></span>
+                    <label>
+                      <input type="checkbox" class="ace" ng-checked="item.checked" ng-click="item.checked = !item.checked"/>
+                      <span class="lbl" ng-bind="'&nbsp;'+item.sn"></span>
                     </label>
                   </td>
                   <td class="nowrap align-middle" ng-bind="item.name"></td>
@@ -81,11 +81,3 @@
   <!-- /.main-container-inner -->
   <ace-top></ace-top>
 </div><!-- /.main-container -->
-
-
-a = true|false
-a = 0|1
-
-<input ng-model="a" checked/>
-
-<inpit ng-checked="a" type="checkbox" ng-click="a=!a"/>
