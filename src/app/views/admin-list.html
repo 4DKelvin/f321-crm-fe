@@ -1,0 +1,78 @@
+<ace-navbar></ace-navbar>
+<div class="main-container" id="main-container">
+  <div class="main-container-inner">
+    <ace-sidebar mini="home.mini"></ace-sidebar>
+    <div class="main-content" ng-class="{'mini-side':home.mini}">
+      <ace-breadcrumb></ace-breadcrumb>
+      <div class="page-content">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="table-responsive">
+              <div class="space-4"></div>
+
+              <div class="widget-box transparent">
+                <div class="widget-header">
+                  <h4>用户列表</h4>
+
+                  <div class="widget-toolbar no-border">
+                    <a class="tooltip-info" href="javascript:void(0);" data-rel="tooltip" data-placement="bottom"
+                       title="添加" ui-sref="a-new"
+                       data-action="settings">
+                      <i class="icon-plus"></i>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="widget-body">
+                  <div class="widget-main no-padding-right no-padding-left">
+                    <table class="table table-striped table-bordered table-hover no-margin-bottom">
+                      <thead>
+                      <tr>
+                        <th>账号</th>
+                        <th>账号状态</th>
+                        <th>是否管理员</th>
+                        <th>工作昵称</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>生日</th>
+                        <th>部门</th>
+                        <th>职位</th>
+                        <th>操作</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="row in al.list">
+                        <td ng-bind="row.account"></td>
+                        <td ng-bind="row.status==0?'正常':'锁定'"></td>
+                        <td ng-bind="row.isAdmin==1?'是':'否'"></td>
+                        <td ng-bind="row.comName"></td>
+                        <td ng-bind="row.realName"></td>
+                        <td ng-bind="row.sex"></td>
+                        <td ng-bind="row.birthday"></td>
+                        <td ng-bind="row.dept"></td>
+                        <td ng-bind="row.position"></td>
+                        <td>
+                          <a ui-sref="a-modify({user:row})">编辑</a>
+                        </td>
+                      </tr>
+                      <!-- -->
+                      </tbody>
+                    </table>
+                    <!-- -->
+                    <ace-pager index="al.params.index" size="al.params.size" count="al.count"
+                               len="al.list.length"></ace-pager>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.page-content -->
+    </div>
+    <!-- /.main-content -->
+  </div>
+  <!-- /.main-container-inner -->
+  <ace-top></ace-top>
+</div>
+<!-- /.main-container -->

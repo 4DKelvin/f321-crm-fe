@@ -25,6 +25,20 @@
         controllerAs: 'home'
       },
       {
+        group: '系统设置',
+        groupIco: 'icon-cog',
+        text: '编辑用户',
+        key: 'a-modify',
+        url: '/admin/modify/',
+        params: {
+          user: null
+        },
+        cache: false,
+        templateUrl: 'app/views/admin-new.html',
+        controller: 'adminNew',
+        controllerAs: 'an'
+      },
+      {
         group: '客户资源管理',
         groupIco: 'icon-user',
         text: '客户详情',
@@ -57,6 +71,26 @@
         templateUrl: 'app/views/setting-profile.html',
         controller: 'settingProfile',
         controllerAs: 'profile'
+      }, {
+        group: '系统设置',
+        groupIco: 'icon-cog',
+        text: '用户列表',
+        key: 'a-list',
+        url: '/admin/list',
+        cache: false,
+        templateUrl: 'app/views/admin-list.html',
+        controller: 'adminList',
+        controllerAs: 'al'
+      }, {
+        group: '系统设置',
+        groupIco: 'icon-cog',
+        text: '新用户录入',
+        key: 'a-new',
+        url: '/admin/new',
+        cache: false,
+        templateUrl: 'app/views/admin-new.html',
+        controller: 'adminNew',
+        controllerAs: 'an'
       }, /*个人资源管理*/{
         group: '个人资源管理',
         groupIco: 'icon-puzzle-piece',

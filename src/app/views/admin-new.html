@@ -1,0 +1,193 @@
+<ace-navbar></ace-navbar>
+<div class="main-container" id="main-container">
+  <div class="main-container-inner">
+    <ace-sidebar mini="home.mini"></ace-sidebar>
+    <div class="main-content" ng-class="{'mini-side':home.mini}">
+      <ace-breadcrumb></ace-breadcrumb>
+      <div class="page-content">
+        <div class="row">
+          <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="widget-box transparent">
+              <div class="widget-header">
+                <h4 ng-bind="an.title"></h4>
+              </div>
+              <div class="widget-body">
+                <div class="widget-main no-padding-right no-padding-left">
+                  <form class="form-horizontal" role="form">
+                    <fieldset>
+                      <table class="table table-bordered no-margin-bottom">
+                        <tbody>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>账号</label>
+                          </td>
+                          <td class="align-middle" colspan="3">
+                            <input type="text" ng-model="an.user.account" style="width: 100%"/>
+                          </td>
+                        </tr>
+                        <tr>
+
+                          <td class="align-middle nowrap align-right">
+                            <label>主页</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.homepage"/>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label>密码</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="password" ng-model="an.user.password"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>状态</label>
+                          </td>
+                          <td class="align-middle">
+                            <label>
+                              <input type="radio" name="isAdmin" ng-checked="an.user.isAdmin==0"
+                                     ng-click="an.user.isAdmin=0"/>
+                              正常
+                            </label>
+                            <label>
+                              <input type="radio" name="isAdmin" ng-checked="an.user.isAdmin==1"
+                                     ng-click="an.user.isAdmin=1"/>
+                              锁定
+                            </label>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label>工作昵称</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.comName"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>姓名</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.realName"/>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label>性别</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.sex"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>生日</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="date" ng-model="an.user.brithday"/>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label>部门</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.dept"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>职位</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.position"/>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label>电话</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="tel" ng-model="an.user.tel"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>手机</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.mobile"/>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label>邮箱</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="email" ng-model="an.user.email"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>QQ</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.qq"/>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label>MSN</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.msn"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>其他联系方式</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.otherTel"/>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label>入职时间</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="date" ng-model="an.user.reportDt"/>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="align-middle nowrap align-right">
+                            <label>上岗时间</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="date" ng-model="an.user.jobDt"/>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label>照片</label>
+                          </td>
+                          <td class="align-middle">
+                            <input type="file" ng-model="an.user.photo"/>
+                          </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <td colspan="align-middle">
+                          </td>
+                          <td colspan="3">
+                            <a class="btn btn-danger" type="button" ng-click="an.save()"> 提交</a></td>
+                        </tr>
+                        </tfoot>
+                      </table>
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- PAGE CONTENT ENDS -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.page-content -->
+    </div>
+    <!-- /.main-content -->
+  </div>
+  <!-- /.main-container-inner -->
+  <ace-top></ace-top>
+</div><!-- /.main-container -->

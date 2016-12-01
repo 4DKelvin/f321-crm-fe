@@ -1,0 +1,51 @@
+<ace-navbar></ace-navbar>
+<div class="main-container" id="main-container">
+  <div class="main-container-inner">
+    <ace-sidebar mini="home.mini"></ace-sidebar>
+    <div class="main-content" ng-class="{'mini-side':home.mini}">
+      <ace-breadcrumb></ace-breadcrumb>
+      <div class="page-content">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover no-margin-bottom">
+                <thead>
+                <tr>
+                  <th>客户名称</th>
+                  <th>关键字</th>
+                  <th class="hidden-480">品牌</th>
+                  <th>所属库</th>
+                  <th class="hidden-480">地区</th>
+                  <th class="hidden-480">陈列期</th>
+                  <th>业务员名字</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in pi.list">
+                  <td>
+                    <a ui-sref="customer({id:row.id})" ng-bind="row.name"></a>
+                  </td>
+                  <td ng-bind="row.keyword"></td>
+                  <td class="hidden-480" ng-bind="row.brand"></td>
+                  <td ng-bind="row.warehouse"></td>
+                  <td class="hidden-480" ng-bind="row.loc|loc"></td>
+                  <td class="hidden-480" ng-bind="row.isOpenLock?'已过':'未过'"></td>
+                  <td ng-bind="row.ownerName"></td>
+                </tr>
+                <!-- -->
+                </tbody>
+              </table>
+              <!-- -->
+              <ace-pager index="pi.params.index" size="pi.params.size" count="pi.count"
+                         len="pi.list.length"></ace-pager>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.page-content -->
+    </div>
+    <!-- /.main-content -->
+  </div>
+  <!-- /.main-container-inner -->
+  <ace-top></ace-top>
+</div><!-- /.main-container -->

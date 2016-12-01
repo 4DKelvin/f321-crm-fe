@@ -186,13 +186,19 @@
       customer$normal: function (params) {
         var obj = this.convert(params);
         obj.content.warehouse = obj.content.warehouse.value;
-        return this.base.post('customer/page',obj);
+        return this.base.post('customer/page', obj);
       },
       peronal$ts: function (params) {
         return this.base.post('customer/ts', this.convert(params));
       },
       customer$info: function (customerId) {
         return this.base.get('customer/' + customerId);
+      },
+      user$list: function (params) {
+        return this.base.post('user/page', this.convert(params));
+      },
+      user$save: function (params) {
+        return this.base[params.id ? 'post' : 'put']('user', this.convert(params));
       }
     };
   }
