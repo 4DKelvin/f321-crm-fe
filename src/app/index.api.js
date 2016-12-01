@@ -169,6 +169,9 @@
       peronal$normal: function (params) {
         return this.base.post('customer/my/page', this.convert(params));
       },
+      customer$normal: function (params) {
+        return this.base.post('customer/page', this.convert(params));
+      },
       peronal$ts: function (params) {
         return this.base.post('customer/ts', this.convert(params));
       },

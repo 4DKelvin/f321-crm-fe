@@ -141,9 +141,9 @@
         key: 'g-conflict',
         url: '/global/conflict',
         cache: false,
-        templateUrl: 'app/views/personal-normal.html',
-        controller: 'personalNormal',
-        controllerAs: 'pn'
+        templateUrl: 'app/views/personal-customer.html',
+        controller: 'personalCustomer',
+        controllerAs: 'pcc'
       }, {
         group: '公共资源管理',
         groupIco: 'icon-globe',
@@ -151,9 +151,9 @@
         key: 'g-commons',
         url: '/global/commons',
         cache: false,
-        templateUrl: 'app/views/personal-normal.html',
-        controller: 'personalNormal',
-        controllerAs: 'pn'
+        templateUrl: 'app/views/personal-customer.html',
+        controller: 'personalCustomer',
+        controllerAs: 'pcc'
       }, {
         group: '公共资源管理',
         groupIco: 'icon-globe',
@@ -161,9 +161,9 @@
         key: 'g-receive',
         url: '/global/receive',
         cache: false,
-        templateUrl: 'app/views/personal-normal.html',
-        controller: 'personalNormal',
-        controllerAs: 'pn'
+        templateUrl: 'app/views/personal-customer.html',
+        controller: 'personalCustomer',
+        controllerAs: 'pcc'
       }, {
         group: '公共资源管理',
         groupIco: 'icon-globe',
@@ -201,9 +201,9 @@
         key: 'c-list',
         url: '/client/list',
         cache: false,
-        templateUrl: 'app/views/client-list.html',
-        controller: 'clientList',
-        controllerAs: 'cl'
+        templateUrl: 'app/views/personal-customer.html',
+        controller: 'personalCustomer',
+        controllerAs: 'pcc'
       }, {
         group: '客户资源管理',
         groupIco: 'icon-user',

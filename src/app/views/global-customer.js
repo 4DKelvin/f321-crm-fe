@@ -73,6 +73,18 @@
             value: key
           });
         }
+        return f321Api.dict$loc();
+      }, function (err) {
+        defer.reject(err);
+      }).then(function (res) {
+        console.log(res);
+        result.locations = [];
+        for (var key in res) {
+          result.locations.push({
+            name: res[key],
+            value: key
+          });
+        }
         return f321Api.customer$info($stateParams.id);
       }, function (err) {
         defer.reject(err);
@@ -86,6 +98,11 @@
         result.warehouseType.forEach(function (type) {
           if (type.value == result.info.crmCustomerVo.warehouse) {
             result.info.crmCustomerVo.warehouse = type;
+          }
+        });
+        result.locations.forEach(function (type) {
+          if (type.value == result.info.crmCustomerVo.loc) {
+            result.info.crmCustomerVo.loc = type;
           }
         });
         if (result.info.crmOperatorLogList) {
@@ -138,7 +155,7 @@
       toastr.error(err, '出错')
     });
 
-    vm.saveGiveup = function(giveup){
+    vm.saveGiveup = function (giveup) {
       giveup.customerId = $stateParams.id;
       f321Api.giveup$save(giveup).then(function (res) {
         f321Api.giveup$log($stateParams.id, vm.info.crmGiveupLog.page, vm.info.crmGiveupLog.size).then(function (res) {

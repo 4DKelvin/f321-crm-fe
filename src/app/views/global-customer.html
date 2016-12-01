@@ -260,7 +260,9 @@
                             <label>所属地区</label>
                           </td>
                           <td class="align-middle">
-                            <input readonly="" type="text" ng-model="gc.info.crmCustomerVo.loc"/>
+                            <select ng-model="gc.info.crmCustomerVo.loc"
+                                    ng-options="ware as ware.name for ware in gc.locations track by ware.value">
+                            </select>
                           </td>
                           <td class="align-middle nowrap align-right">
                             <label>客户关键字</label>
@@ -540,7 +542,7 @@
 
                 <div class="widget-toolbar no-border">
                   <a class="tooltip-info" href="javascript:void(0);" data-rel="tooltip" data-placement="bottom"
-                     title="所有" ng-click="gc.info.crmContactLog = {page:1,size:10}" ng-if="!gc.info.crmContactLog"
+                     title="所有" ng-click="gc.info.crmContactLog = {page:0,size:10}" ng-if="!gc.info.crmContactLog"
                      data-action="settings">
                     <i class="icon-tasks"></i>
                   </a>
@@ -586,7 +588,7 @@
 
                 <div class="widget-toolbar no-border">
                   <a class="tooltip-info" href="javascript:void(0);" data-rel="tooltip" data-placement="bottom"
-                     title="所有" ng-click="gc.info.crmGiveupLog = {page:1,size:10}" ng-if="!gc.info.crmGiveupLog"
+                     title="所有" ng-click="gc.info.crmGiveupLog = {page:0,size:10}" ng-if="!gc.info.crmGiveupLog"
                      data-action="settings">
                     <i class="icon-tasks"></i>
                   </a>
@@ -635,7 +637,7 @@
 
                 <div class="widget-toolbar no-border">
                   <a class="tooltip-info" href="javascript:void(0);" data-rel="tooltip" data-placement="bottom"
-                     title="所有" ng-click="gc.info.crmOperatorLog = {page:1,size:10}" ng-if="!gc.info.crmOperatorLog"
+                     title="所有" ng-click="gc.info.crmOperatorLog = {page:0,size:10}" ng-if="!gc.info.crmOperatorLog"
                      data-action="settings">
                     <i class="icon-tasks"></i>
                   </a>
