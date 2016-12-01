@@ -1,0 +1,88 @@
+<ace-navbar></ace-navbar>
+<div class="main-container" id="main-container">
+  <div class="main-container-inner">
+    <ace-sidebar mini="home.mini"></ace-sidebar>
+    <div class="main-content" ng-class="{'mini-side':home.mini}">
+      <ace-breadcrumb></ace-breadcrumb>
+      <div class="page-content">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="table-responsive">
+              <div class="space-4"></div>
+              <div class="table-header no-margin-bottom pr12 bg-eff3f8 color-393939">
+                <div class="space-6"></div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label>
+                      意向度：
+                      <select size="1" name="sourcePersonalNormal_length" aria-controls="sourcePersonalNormal">
+                        <option value="10" selected="selected">10</option>
+                        <option value="80">80</option>
+                        <option value="90">90</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="input-group pull-right">
+													<span class="input-icon input-icon-right">
+														搜索： <input type="text" ng-model="pcc.params.content.keyword">
+														<i class="icon-search top6"></i>
+													</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- -->
+              <table class="table table-striped table-bordered table-hover no-margin-bottom">
+                <thead>
+                <tr>
+                  <th class="center">
+                    <label>
+                      <input type="checkbox" class="ace"/>
+                      <span class="lbl"></span>
+                    </label>
+                  </th>
+                  <th>客户名称</th>
+                  <th>关键字</th>
+                  <th class="hidden-480">最后联系时间</th>
+                  <th>未跟踪</th>
+                  <th class="hidden-480">地区</th>
+                  <th class="hidden-480">T</th>
+                  <th>有效期</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in pcc.list">
+                  <td class="center">
+                    <label>
+                      <input type="checkbox" class="ace"/>
+                      <span class="lbl"></span>
+                    </label>
+                  </td>
+                  <td>
+                    <a ui-sref="customer({id:row.id})" ng-bind="row.name"></a>
+                  </td>
+                  <td ng-bind="row.keyword"></td>
+                  <td class="hidden-480" ng-bind="row.contactDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
+                  <td>/</td>
+                  <td class="hidden-480" ng-bind="row.loc"></td>
+                  <td class="hidden-480" ng-bind="row.lockT"></td>
+                  <td ng-bind="row.displayDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
+                </tr>
+                <!-- -->
+                </tbody>
+              </table>
+              <!-- -->
+              <ace-pager index="pcc.params.index" size="pcc.params.size" count="pcc.count"
+                         len="pcc.list.length"></ace-pager>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.page-content -->
+    </div>
+    <!-- /.main-content -->
+  </div>
+  <!-- /.main-container-inner -->
+  <ace-top></ace-top>
+</div><!-- /.main-container -->
