@@ -94,6 +94,9 @@
         key: 'p-important',
         url: '/personal/important',
         cache: false,
+        templateUrl: 'app/views/personal-important.html',
+        controller: 'personalImportant',
+        controllerAs: 'pi'
       }, {
         group: '个人资源管理',
         groupIco: 'icon-puzzle-piece',

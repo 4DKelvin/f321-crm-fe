@@ -26,7 +26,7 @@
                     <div class="input-group pull-right">
 													<span class="input-icon input-icon-right">
 														搜索： <input type="text" ng-model="pn.params.content.keyword">
-														<i class="icon-search top6"></i>
+														<i class="icon-search top6" ng-click="pn.search()"></i>
 													</span>
                     </div>
                   </div>
@@ -65,7 +65,7 @@
                   <td ng-bind="row.keyword"></td>
                   <td class="hidden-480" ng-bind="row.contactDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
                   <td>/</td>
-                  <td class="hidden-480" ng-bind="row.loc"></td>
+                  <td class="hidden-480" ng-bind="row.loc|loc"></td>
                   <td class="hidden-480" ng-bind="row.lockT"></td>
                   <td ng-bind="row.displayDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
                 </tr>

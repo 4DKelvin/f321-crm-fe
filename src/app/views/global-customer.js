@@ -5,8 +5,33 @@
     .module('f321CrmFe')
     .controller('globalCustomer', globalCustomer);
   /** @ngInject */
-  function globalCustomer($q, f321Api, toastr, $stateParams, $scope) {
+  function globalCustomer($q, f321Api, toastr, $stateParams, $scope, $state) {
     var vm = this;
+    vm.locations = $.parseJSON(localStorage.getItem('location'));
+    if (!vm.locations) {
+      f321Api.dict$loc().then(function (res) {
+        var find = function (sn) {
+          for (var i = 0; i < res.length; i++) {
+            if (res[i].sn == sn) {
+              return res[i];
+            }
+          }
+          return false;
+        };
+        vm.locations = res.map(function (loc) {
+          loc.parentName = find(loc.parent).nameCn
+          return loc;
+        });
+        vm.locations.forEach(function (type) {
+          if (type.sn == vm.info.crmCustomerVo.loc) {
+            vm.info.crmCustomerVo.loc = type;
+          }
+        });
+        localStorage.setItem('location', JSON.stringify(vm.locations));
+      }, function (err) {
+
+      });
+    }
     vm.getData = function () {
       var defer = $q.defer(),
         result = {};
@@ -73,18 +98,6 @@
             value: key
           });
         }
-        return f321Api.dict$loc();
-      }, function (err) {
-        defer.reject(err);
-      }).then(function (res) {
-        console.log(res);
-        result.locations = [];
-        for (var key in res) {
-          result.locations.push({
-            name: res[key],
-            value: key
-          });
-        }
         return f321Api.customer$info($stateParams.id);
       }, function (err) {
         defer.reject(err);
@@ -98,11 +111,6 @@
         result.warehouseType.forEach(function (type) {
           if (type.value == result.info.crmCustomerVo.warehouse) {
             result.info.crmCustomerVo.warehouse = type;
-          }
-        });
-        result.locations.forEach(function (type) {
-          if (type.value == result.info.crmCustomerVo.loc) {
-            result.info.crmCustomerVo.loc = type;
           }
         });
         if (result.info.crmOperatorLogList) {
@@ -135,6 +143,11 @@
             return log;
           });
         }
+        vm.locations.forEach(function (type) {
+          if (type.sn == result.info.crmCustomerVo.loc) {
+            result.info.crmCustomerVo.loc = type;
+          }
+        });
         result.info.crmContactNew = [];
         result.info.crmContactLogNew = [];
         defer.resolve(result);
@@ -184,6 +197,24 @@
       }, function (err) {
         toastr.error(err, '出错');
       });
+    };
+
+    vm.setTs = function (ts) {
+      f321Api.set$ts([$stateParams.id], ts, vm.info.crmCustomerVo.warehouse.value).then(function (res) {
+        toastr.success('设置成功!', '操作成功');
+        $state.reload();
+      }, function (err) {
+        toastr.error(err, '出错');
+      })
+    };
+
+    vm.important = function (flag) {
+      f321Api.customer$kac(flag, $stateParams.id).then(function (res) {
+        toastr.success('设置成功!', '操作成功');
+        $state.reload();
+      }, function (err) {
+        toastr.error(err, '出错');
+      })
     };
 
     vm.saveContact = function (contact) {

@@ -26,7 +26,7 @@
       var options = $.extend({
         url: url,
         method: method,
-        cache: false
+        cache: true
       }, transferData);
       $http(options).success(function (data) {
         if (data.status == "200") {
@@ -74,7 +74,13 @@
         return this.base.post('customer', this.convert(params));
       },
       contact$log$save: function (params) {
-        return this.base.post('contactLog', this.convert(params));
+        var obj = this.convert(params);
+        for (var key in obj) {
+          if (obj[key].constructor == Object) {
+            obj[key] = obj[key].value || obj[key].sn;
+          }
+        }
+        return this.base.post('contactLog', obj);
       },
       contact$log: function (customerId, index, size) {
         return this.base.post('contactLog/' + customerId + '/page', {
@@ -163,6 +169,14 @@
           dictionaryType: dictionaryType
         })
       },
+      customer$kac: function (isKac, customerId) {
+        return this.base[isKac ? 'post' : 'put']('/customer/kac', {
+          customerId: customerId
+        });
+      },
+      kac$list: function (params) {
+        return this.base.post('customer/kac/page', this.convert(params))
+      },
       dict$loc: function () {
         return this.system$dictionary('loc')
       },
@@ -170,7 +184,9 @@
         return this.base.post('customer/my/page', this.convert(params));
       },
       customer$normal: function (params) {
-        return this.base.post('customer/page', this.convert(params));
+        var obj = this.convert(params);
+        obj.content.warehouse = obj.content.warehouse.value;
+        return this.base.post('customer/page',obj);
       },
       peronal$ts: function (params) {
         return this.base.post('customer/ts', this.convert(params));

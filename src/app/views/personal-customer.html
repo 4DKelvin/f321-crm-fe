@@ -12,7 +12,7 @@
               <div class="table-header no-margin-bottom pr12 bg-eff3f8 color-393939">
                 <div class="space-6"></div>
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-6" ng-if="pcc.title!='客户管理'">
                     <label>
                       意向度：
                       <select size="1" name="sourcePersonalNormal_length" aria-controls="sourcePersonalNormal">
@@ -22,11 +22,19 @@
                       </select>
                     </label>
                   </div>
+                  <div class="col-sm-6" ng-if="pcc.title=='客户管理'">
+                    <label>
+                      所属库：
+                      <select ng-model="pcc.params.content.warehouse"
+                              ng-options="ware as ware.name for ware in pcc.warehouseType track by ware.value">
+                      </select>
+                    </label>
+                  </div>
                   <div class="col-sm-6">
                     <div class="input-group pull-right">
 													<span class="input-icon input-icon-right">
 														搜索： <input type="text" ng-model="pcc.params.content.keyword">
-														<i class="icon-search top6"></i>
+														<i class="icon-search top6" ng-click="pcc.search()"></i>
 													</span>
                     </div>
                   </div>
@@ -65,7 +73,7 @@
                   <td ng-bind="row.keyword"></td>
                   <td class="hidden-480" ng-bind="row.contactDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
                   <td>/</td>
-                  <td class="hidden-480" ng-bind="row.loc"></td>
+                  <td class="hidden-480" ng-bind="row.loc|loc"></td>
                   <td class="hidden-480" ng-bind="row.lockT"></td>
                   <td ng-bind="row.displayDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
                 </tr>

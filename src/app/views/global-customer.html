@@ -9,6 +9,52 @@
             <!-- 客户基本信息 -->
             <div class="space-6"></div>
             <div class="widget-box transparent">
+
+              <div class="logTemplate" ng-if="gc.ts">
+
+                <div class="widget-box transparent">
+                  <div class="widget-header">
+                    <h4>TS设置</h4>
+                  </div>
+                  <div class="widget-body">
+                    <div class="widget-main no-padding-right no-padding-left">
+                      <form class="form-horizontal" role="form">
+                        <fieldset>
+                          <table class="table table-bordered no-margin-bottom">
+                            <tbody>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>客户名称</label>
+                              </td>
+                              <td class="align-middle" ng-bind="gc.info.crmCustomerVo.name">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>TS值</label>
+                              </td>
+                              <td class="align-middle">
+                                <input type="text" ng-model="gc.info.crmCustomerVo.lockTs"/>
+                              </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                              <td></td>
+                              <td>
+                                <a class="btn btn-danger" type="button"
+                                   ng-click="gc.setTs(gc.info.crmCustomerVo.lockTs)"> 提交</a>
+                                <a class="btn btn-info" type="button" ng-click="gc.ts=false"> 取消</a>
+                              </td>
+                            </tr>
+                            </tfoot>
+                          </table>
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <!-- -->
               <div class="logTemplate" ng-if="gc.giveup">
 
@@ -188,7 +234,12 @@
                 </div>
               </div>
               <div class="widget-header">
-                <h4>客户基本信息 <span class="red align-middle">TS=[4]; T=[1]; TS-T=[3]</span></h4>
+                <h4>客户基本信息
+                  <span class="red align-middle">TS=[<span ng-bind="gc.info.crmCustomerVo.lockTs"></span>]; T=[<span
+                  ng-bind="gc.info.crmCustomerVo.lockT"></span>]; TS-T=[<span ng-bind="gc.info.crmCustomerVo.lockTs-gc.info.crmCustomerVo.lockT"></span>]</span>
+
+
+                </h4>
 
                 <div class="widget-toolbar no-border">
                   <a href="javascript:void(0);" data-action="collapse">
@@ -236,7 +287,7 @@
                           </td>
                           <td class="align-middle">
                             <select ng-model="gc.info.crmCustomerVo.loc"
-                                    ng-options="ware as ware.name for ware in gc.locations track by ware.value">
+                                    ng-options="loc as loc.nameCn group by loc.parentName for loc in gc.locations track by loc.sn">
                             </select>
                           </td>
                           <td class="align-middle nowrap align-right">
@@ -306,13 +357,16 @@
                     </fieldset>
                     <div class="clearfix form-actions mt12 mb0">
                       <div class="col-md-12 center">
-                        <button class="btn btn-primary" type="button"> TS设置</button>
-                        <button class="btn btn-inverse" type="button"> 设为重点客户</button>
-                        <button class="btn btn-grey" type="button"> 取消重点客户</button>
+                        <button class="btn btn-primary" type="button" ng-click="gc.ts=true"> TS设置</button>
+                        <button class="btn btn-inverse" type="button" ng-if="!gc.info.kac"
+                                ng-click="gc.important(true)"> 设为重点客户
+                        </button>
+                        <button class="btn btn-grey" type="button" ng-if="gc.info.kac" ng-click="gc.important(false)">
+                          取消重点客户
+                        </button>
                         <button class="btn btn-warning" ng-click="gc.giveup={}" type="button"
                                 ng-if="gc.info.crmCustomerVo.warehouse.value!=3"> 放弃客户
                         </button>
-                        <button class="btn btn-pink" type="button"> 约会</button>
                         <button class="btn btn-danger" ng-click="gc.modify={}" type="button"> 申请资料修改</button>
                         <button class="btn btn-info" type="button"> 保存修改</button>
                         <button class="btn" type="reset"> 重置</button>

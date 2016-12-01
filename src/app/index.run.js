@@ -2,7 +2,24 @@
   'use strict';
   angular
     .module('f321CrmFe')
-    .run(runBlock);
+    .filter('loc', function () {
+      return function (data) {
+        var locations = $.parseJSON(localStorage.getItem('location'));
+
+        function find(sn) {
+          if (sn) {
+            for (var i = 0; i < locations.length; i++) {
+              if (locations[i].sn == sn) {
+                return locations[i].nameCn;
+              }
+            }
+          }
+          return '';
+        }
+
+        return find(data);
+      };
+    }).run(runBlock);
 
   /** @ngInject */
   function runBlock($timeout, $rootScope, $cookies, $state, toastr) {

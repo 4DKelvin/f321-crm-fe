@@ -12,25 +12,29 @@
       size: 10,
       content: {
         keyword: '',
-        warehouse: 0
+        warehouse: {
+          value: 1
+        }
       }
     };
     vm.list = [];
     vm.count = 0;
+    vm.title = $state.current.text;
     vm.getData = function (params) {
       var defer = $q.defer(),
         result = {};
       f321Api.enum$warehouse$type().then(function (res) {
         for (var key in res) {
           if (res[key] == $state.current.text) {
-            params.content.warehouse = key;
+            params.content.warehouse.value = key;
           }
         }
+        result.warehouseType = res;
         return f321Api.customer$normal(params);
       }, function (err) {
         defer.reject(err);
       }).then(function (res) {
-        result = res;
+        result.list = res;
         defer.resolve(result);
       }, function (err) {
         defer.reject(err);
@@ -38,11 +42,21 @@
       return defer.promise;
     };
 
-    vm.getData(vm.params).then(function (res) {
-      vm.list = res.pageContent;
-      vm.count = res.total;
-    }, function (err) {
-      toastr.error(err, '出错')
-    });
+    vm.search = function () {
+      vm.getData(vm.params).then(function (res) {
+        vm.list = res.list.pageContent;
+        vm.count = res.list.total;
+        vm.warehouseType = [];
+        for (var key in res.warehouseType) {
+          vm.warehouseType.push({
+            name: res.warehouseType[key],
+            value: key
+          });
+        }
+      }, function (err) {
+        toastr.error(err, '出错')
+      });
+    };
+    vm.search();
   }
 })();

@@ -37,12 +37,14 @@
       });
       return defer.promise;
     };
-
-    vm.getData(vm.params).then(function (res) {
-      vm.list = res.pageContent;
-      vm.count = res.total;
-    }, function (err) {
-      toastr.error(err, '出错')
-    });
+    vm.search = function () {
+      vm.getData(vm.params).then(function (res) {
+        vm.list = res.pageContent;
+        vm.count = res.total;
+      }, function (err) {
+        toastr.error(err, '出错')
+      });
+    }
+    vm.search();
   }
 })();
