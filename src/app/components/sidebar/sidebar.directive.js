@@ -8,7 +8,7 @@
   document.createElement('ace-sidebar');
 
   /** @ngInject */
-  function aceSidebar(short_url, $location) {
+  function aceSidebar(short_url, $location, $cookies) {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/sidebar/sidebar.html',
@@ -19,6 +19,7 @@
       controller: function () {
         var vm = this;
         vm.menus = [];
+        vm.profile = $.parseJSON($cookies.get('profile'));
         function find(name, icon) {
           var result = null;
           vm.menus.forEach(function (menu) {

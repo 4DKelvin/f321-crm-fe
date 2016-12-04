@@ -5,6 +5,39 @@
     <div class="main-content" ng-class="{'mini-side':home.mini}">
       <ace-breadcrumb></ace-breadcrumb>
       <div class="page-content">
+        <div class="table-responsive">
+          <div class="space-4"></div>
+          <div class="table-header no-margin-bottom pr12 bg-eff3f8 color-393939">
+            <div class="space-6"></div>
+            <div class="row">
+              <div class="col-sm-6" ng-if="pcc.title!='客户管理'">
+                <label>
+                  意向度：
+                  <select size="1" name="sourcePersonalNormal_length" aria-controls="sourcePersonalNormal">
+                    <option value="10" selected="selected">10</option>
+                    <option value="80">80</option>
+                    <option value="90">90</option>
+                  </select>
+                </label>
+              </div>
+              <div class="col-sm-6" ng-if="pcc.title=='客户管理'">
+                <label>
+                  所属库：
+                  <select ng-model="pcc.params.content.warehouse"
+                          ng-options="ware as ware.name for ware in pcc.warehouseType track by ware.value">
+                  </select>
+                </label>
+              </div>
+              <div class="col-sm-6">
+                <div class="input-group pull-right">
+													<span class="input-icon input-icon-right">
+														搜索： <input type="text" ng-model="pcc.params.content.keyword">
+														<i class="icon-search top6" ng-click="pcc.search()"></i>
+													</span>
+                </div>
+              </div>
+            </div>
+          </div>
         <div class="row">
           <div class="col-xs-12">
             <div class="table-responsive">
@@ -27,7 +60,7 @@
                   </td>
                   <td ng-bind="row.keyword"></td>
                   <td class="hidden-480" ng-bind="row.brand"></td>
-                  <td ng-bind="row.warehouse"></td>
+                  <td ng-bind="row.warehouse | warehouse"></td>
                   <td class="hidden-480" ng-bind="row.loc|loc"></td>
                   <td class="hidden-480" ng-bind="row.isOpenLock?'已过':'未过'"></td>
                   <td ng-bind="row.ownerName"></td>

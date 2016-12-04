@@ -5,8 +5,9 @@
     .module('f321CrmFe')
     .controller('globalCustomer', globalCustomer);
   /** @ngInject */
-  function globalCustomer($q, f321Api, toastr, $stateParams, $scope, $state) {
+  function globalCustomer($q, f321Api, toastr, $stateParams, $scope, $state,$cookies) {
     var vm = this;
+    vm.profile = $.parseJSON($cookies.get('profile'));
     vm.locations = $.parseJSON(localStorage.getItem('location'));
     if (!vm.locations) {
       f321Api.dict$loc().then(function (res) {
@@ -115,7 +116,7 @@
         });
         if (result.info.crmOperatorLogList) {
           result.info.crmOperatorLogList = result.info.crmOperatorLogList.map(function (log) {
-            res.operateType.forEach(function (type) {
+            result.operateType.forEach(function (type) {
               if (log.type == type.value) {
                 log.type = type;
               }
@@ -164,6 +165,7 @@
       vm.conflictType = res.conflictType;
       vm.warehouseType = res.warehouseType;
       vm.intentionType = res.intentionType;
+      vm.isOwner = vm.info.crmCustomerVo.ownerId == vm.profile.id;
     }, function (err) {
       toastr.error(err, '出错')
     });

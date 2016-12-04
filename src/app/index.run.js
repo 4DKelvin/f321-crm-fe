@@ -19,6 +19,24 @@
 
         return find(data);
       };
+    })
+    .filter('warehouse', function () {
+      return function (data) {
+        var warehouses = $.parseJSON(localStorage.getItem('warehouse'));
+
+        function find(sn) {
+          if (sn) {
+            for (var i = 0; i < warehouses.length; i++) {
+              if (warehouses[i].value == sn) {
+                return warehouses[i].name;
+              }
+            }
+          }
+          return '';
+        }
+
+        return find(data);
+      };
     }).run(runBlock);
 
   /** @ngInject */

@@ -4,11 +4,15 @@
 <div class="sidebar" ng-class="{'menu-min':side.mini,'display':side.show}" id="sidebar">
   <ul class="nav nav-list">
     <li>
-      <a ui-sref="home"> <i class="icon-pushpin"></i> <span class="menu-text"> 欢迎您,管理员 </span> </a>
+      <a ui-sref="home"> <i class="icon-pushpin"></i> <span class="menu-text"
+                                                            ng-bind="'欢迎您,'+side.profile.comName"> </span> </a>
     </li>
-    <li ng-repeat="menu in side.menus" ng-class="{'active open':menu.active}">
-      <a href="javascript:void(0);" ng-click="menu.active = !menu.active" class="dropdown-toggle"> <i ng-class="menu.icon"></i>
-        <span class="menu-text" ng-bind="menu.name"></span> <b class="arrow icon-angle-down"></b> </a>
+    <li ng-repeat="menu in side.menus" ng-class="{'active open':menu.active}"
+        ng-if="side.profile.isAdmin!=1?(menu.name!='系统设置' && menu.name!='客户资源管理'):true">
+
+      <a href="javascript:void(0);" ng-click="menu.active = !menu.active" class="dropdown-toggle"> <i
+        ng-class="menu.icon"></i>
+        <span class="menu-text" ng-bind="menu.name"></span><b class="arrow icon-angle-down"></b> </a>
       <ul class="submenu">
         <li ng-repeat="submenu in menu.items" ng-class="{'active':submenu.active}"><a ng-href="#{{submenu.url}}"> <i
           class="icon-double-angle-right"></i> <span ng-bind="submenu.text"></span> </a></li>

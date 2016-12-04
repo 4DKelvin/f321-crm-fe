@@ -235,8 +235,10 @@
               </div>
               <div class="widget-header">
                 <h4>客户基本信息
-                  <span class="red align-middle">TS=[<span ng-bind="gc.info.crmCustomerVo.lockTs"></span>]; T=[<span
-                  ng-bind="gc.info.crmCustomerVo.lockT"></span>]; TS-T=[<span ng-bind="gc.info.crmCustomerVo.lockTs-gc.info.crmCustomerVo.lockT"></span>]</span>
+                  <span class="red align-middle" ng-if="gc.info.crmCustomerVo.warehouse<5">TS=[<span
+                    ng-bind="gc.info.crmCustomerVo.lockTs"></span>]; T=[<span
+                    ng-bind="gc.info.crmCustomerVo.lockT"></span>]; TS-T=[<span
+                    ng-bind="gc.info.crmCustomerVo.lockTs-gc.info.crmCustomerVo.lockT"></span>]</span>
 
 
                 </h4>
@@ -308,7 +310,7 @@
                             <label>客户所属库</label>
                           </td>
                           <td class="align-middle">
-                            <select size="1" ng-model="gc.info.crmCustomerVo.warehouse"
+                            <select size="1" ng-model="gc.info.crmCustomerVo.warehouse" disabled="disabled"
                                     ng-options="ware as ware.name for ware in gc.warehouseType track by ware.value">
                             </select>
                           </td>
@@ -356,8 +358,10 @@
                       </table>
                     </fieldset>
                     <div class="clearfix form-actions mt12 mb0">
-                      <div class="col-md-12 center">
-                        <button class="btn btn-primary" type="button" ng-click="gc.ts=true"> TS设置</button>
+                      <div class="col-md-12 center" ng-if="gc.profile.isAdmin!=1">
+                        <button class="btn btn-primary" type="button" ng-click="gc.ts=true"
+                                ng-if="gc.isOwner && gc.info.crmCustomerVo.warehouse.value<5"> TS设置
+                        </button>
                         <button class="btn btn-inverse" type="button" ng-if="!gc.info.kac"
                                 ng-click="gc.important(true)"> 设为重点客户
                         </button>
@@ -365,11 +369,18 @@
                           取消重点客户
                         </button>
                         <button class="btn btn-warning" ng-click="gc.giveup={}" type="button"
-                                ng-if="gc.info.crmCustomerVo.warehouse.value!=3"> 放弃客户
+                                ng-if="gc.isOwner && (gc.info.crmCustomerVo.warehouse.value<=2||gc.info.crmCustomerVo.warehouse.value==4)"> 放弃客户
                         </button>
-                        <button class="btn btn-danger" ng-click="gc.modify={}" type="button"> 申请资料修改</button>
-                        <button class="btn btn-info" type="button"> 保存修改</button>
-                        <button class="btn" type="reset"> 重置</button>
+                        <button class="btn btn-danger" ng-click="gc.modify={}" type="button"
+                                ng-if="gc.isOwner && gc.info.crmCustomerVo.warehouse.value<5"> 申请资料修改</button>
+                        <button class="btn btn-info" type="button"
+                                ng-if="gc.isOwner && gc.info.crmCustomerVo.warehouse.value<5"> 保存修改</button>
+                        <button class="btn btn-info" type="button"
+                                ng-if="gc.info.crmCustomerVo.warehouse.value==5"> 获取</button>
+                      </div>
+                      <div class="col-md-12 center" ng-if="gc.profile.isAdmin==1">
+                        <button class="btn btn-primary" type="button"> 接管客户</button>
+                        <button class="btn btn-inverse" type="button"> 加入冲突库</button>
                       </div>
                     </div>
                   </form>
@@ -378,7 +389,7 @@
             </div>
             <!-- 客户联系人 -->
             <div class="space-10"></div>
-            <div class="widget-box transparent">
+            <div class="widget-box transparent" ng-if="gc.isOwner || gc.info.crmCustomerVo.warehouse.value>=5">
               <div class="widget-header">
                 <h4>客户联系人</h4>
 
@@ -565,7 +576,7 @@
             </div>
             <!-- 拜访记录 -->
             <div class="space-10"></div>
-            <div class="widget-box transparent">
+            <div class="widget-box transparent" ng-if="gc.isOwner || gc.info.crmCustomerVo.warehouse.value>=5">
               <div class="widget-header">
                 <h4>拜访记录</h4>
 
@@ -611,7 +622,7 @@
             </div>
             <!-- 放弃记录 -->
             <div class="space-10"></div>
-            <div class="widget-box transparent">
+            <div class="widget-box transparent" ng-if="gc.isOwner || gc.info.crmCustomerVo.warehouse.value>=5">
               <div class="widget-header">
                 <h4>放弃记录</h4>
 
@@ -660,7 +671,7 @@
             </div>
             <!-- 操作记录 -->
             <div class="space-10"></div>
-            <div class="widget-box transparent">
+            <div class="widget-box transparent" ng-if="gc.isOwner || gc.info.crmCustomerVo.warehouse.value>=5">
               <div class="widget-header">
                 <h4>操作记录</h4>
 

@@ -48,17 +48,21 @@
 
           });
         }
-        f321Api.enum$warehouse$type().then(function (res) {
-          vm.warehouseType = [];
-          for (var key in res) {
-            vm.warehouseType.push({
-              name: res[key],
-              value: key
-            });
-          }
-        }, function (err) {
+        vm.warehouseType = $.parseJSON(localStorage.getItem('warehouse'));
+        if (!vm.warehouseType) {
+          f321Api.enum$warehouse$type().then(function (res) {
+            vm.warehouseType = [];
+            for (var key in res) {
+              vm.warehouseType.push({
+                name: res[key],
+                value: key
+              });
+            }
+            localStorage.setItem('warehouse', JSON.stringify(vm.warehouseType));
+          }, function (err) {
 
-        });
+          });
+        }
         f321Api.enum$intention$Type().then(function (res) {
           vm.intentionType = [];
           for (var key in res) {

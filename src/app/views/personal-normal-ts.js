@@ -7,7 +7,7 @@
   /** @ngInject */
   function personalNormalTs(f321Api, toastr, $state) {
     var vm = this,
-      tab = ['p-normal-ts', 'p-service-ts', 'p-continues-ts', 'p-important-ts'];
+      tab = ['p-normal-ts', 'p-service-ts', '', 'p-continues-ts', 'p-important-ts'];
     vm.params = {
       index: 1,
       size: 10,
