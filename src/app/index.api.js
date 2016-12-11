@@ -71,7 +71,13 @@
         })
       },
       customer$save: function (params) {
-        return this.base.post('customer', this.convert(params));
+        var obj = this.convert(params);
+        for (var key in obj) {
+          if (obj[key].constructor == Object) {
+            obj[key] = obj[key].value || obj[key].sn;
+          }
+        }
+        return this.base.post('customer', obj);
       },
       contact$log$save: function (params) {
         var obj = this.convert(params);
@@ -181,7 +187,21 @@
         return this.system$dictionary('loc')
       },
       peronal$normal: function (params) {
-        return this.base.post('customer/my/page', this.convert(params));
+        var obj = this.convert(params);
+        for (var key in obj) {
+          if (key != 'content') {
+            if (obj[key].constructor == Object) {
+              obj[key] = obj[key].value || obj[key].sn;
+            }
+          } else {
+            for (var nk in obj['content']) {
+              if (obj['content'][nk].constructor == Object) {
+                obj['content'][nk] = obj['content'][nk].value || obj['content'][nk].sn;
+              }
+            }
+          }
+        }
+        return this.base.post('customer/my/page', obj);
       },
       customer$normal: function (params) {
         var obj = this.convert(params);
@@ -198,7 +218,53 @@
         return this.base.post('user/page', this.convert(params));
       },
       user$save: function (params) {
-        return this.base[params.id ? 'post' : 'put']('user', this.convert(params));
+        return this.base[params.id ? 'put' : 'post']('user', this.convert(params));
+      },
+      takeover: function (ids) {
+        return this.base.post('customer/takeOver', {
+          idList: ids
+        });
+      },
+      set$conflict: function (ids) {
+        return this.base.post('customer/setConflict', {
+          idList: ids
+        });
+      },
+      akeover: function (ids, ownerId) {
+        return this.base.post('customer/makeover', {
+          idList: ids,
+          ownerId: ownerId
+        });
+      },
+      search: function (params) {
+        var p = this.convert(params);
+        if (p.content.warehouseList) {
+          p.content.warehouseList = p.content.warehouseList.map(function (item) {
+            return item.id;
+          });
+        }
+        console.log(p);
+        return this.base.post('customer/search', p);
+      },
+      obtain: function (customerId) {
+        return this.base.get('customer/lock', {
+          customerId: customerId
+        });
+      },
+      partner$apply: function (id, partnerId) {
+        return this.base.post('apply/partner', {
+          id: id,
+          partnerId: partnerId
+        });
+      },
+      partner$list: function (params) {
+        return this.base.post('apply/partner/page', this.convert(params));
+      },
+      partner$audit: function (idList, passed) {
+        return this.base.post('apply/partner/audit', {
+          idList: idList,
+          passed: passed
+        });
       }
     };
   }

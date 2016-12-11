@@ -10,6 +10,62 @@
             <div class="space-6"></div>
             <div class="widget-box transparent">
 
+              <div class="logTemplate" ng-if="gc.partner">
+
+                <div class="widget-box transparent">
+                  <div class="widget-header">
+                    <h4>地勤申请</h4>
+                  </div>
+                  <div class="widget-body">
+                    <div class="widget-main no-padding-right no-padding-left">
+                      <form class="form-horizontal" role="form">
+                        <fieldset>
+
+                          <table class="table table-bordered no-margin-bottom">
+                            <tbody>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>客户名</label>
+                              </td>
+                              <td colspan="3">
+                                <input type="text" readonly style="width: 100%" ng-model="gc.partner.name"/>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="align-middle nowrap align-right">
+                                <label>业务员</label>
+                              </td>
+                              <td colspan="3">
+                                <select ng-model="gc.partner.partnerId"
+                                        ng-options="acc as acc.name for acc in gc.accounts track by acc.value">
+                                </select>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                          <div class="space-24"></div>
+                          <div class="clearfix form-actions">
+                            <div class="col-md-offset-8 col-md-2">
+                              <button class="btn btn-info" type="button" ng-click="gc.partnerApply()">
+                                <i class="icon-ok bigger-110"></i>
+                                确定
+                              </button>
+                            </div>
+                            <div class="col-md-2">
+                              <button class="btn btn-danger" type="button" ng-click="gc.partner=false">
+                                <i class="icon-cancel bigger-110"></i>
+                                取消
+                              </button>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
               <div class="logTemplate" ng-if="gc.ts">
 
                 <div class="widget-box transparent">
@@ -235,7 +291,7 @@
               </div>
               <div class="widget-header">
                 <h4>客户基本信息
-                  <span class="red align-middle" ng-if="gc.info.crmCustomerVo.warehouse<5">TS=[<span
+                  <span class="red align-middle" ng-if="gc.info.crmCustomerVo.warehouse.value<5">TS=[<span
                     ng-bind="gc.info.crmCustomerVo.lockTs"></span>]; T=[<span
                     ng-bind="gc.info.crmCustomerVo.lockT"></span>]; TS-T=[<span
                     ng-bind="gc.info.crmCustomerVo.lockTs-gc.info.crmCustomerVo.lockT"></span>]</span>
@@ -362,6 +418,9 @@
                         <button class="btn btn-primary" type="button" ng-click="gc.ts=true"
                                 ng-if="gc.isOwner && gc.info.crmCustomerVo.warehouse.value<5"> TS设置
                         </button>
+                        <button class="btn btn-primary" type="button" ng-click="gc.partner=gc.info.crmCustomerVo"
+                                ng-if="gc.isOwner && gc.info.crmCustomerVo.warehouse.value<5"> 申请地勤
+                        </button>
                         <button class="btn btn-inverse" type="button" ng-if="!gc.info.kac"
                                 ng-click="gc.important(true)"> 设为重点客户
                         </button>
@@ -369,18 +428,22 @@
                           取消重点客户
                         </button>
                         <button class="btn btn-warning" ng-click="gc.giveup={}" type="button"
-                                ng-if="gc.isOwner && (gc.info.crmCustomerVo.warehouse.value<=2||gc.info.crmCustomerVo.warehouse.value==4)"> 放弃客户
+                                ng-if="gc.isOwner && (gc.info.crmCustomerVo.warehouse.value<=2||gc.info.crmCustomerVo.warehouse.value==4)">
+                          放弃客户
                         </button>
                         <button class="btn btn-danger" ng-click="gc.modify={}" type="button"
-                                ng-if="gc.isOwner && gc.info.crmCustomerVo.warehouse.value<5"> 申请资料修改</button>
+                                ng-if="gc.isOwner && gc.info.crmCustomerVo.warehouse.value<5"> 申请资料修改
+                        </button>
                         <button class="btn btn-info" type="button"
-                                ng-if="gc.isOwner && gc.info.crmCustomerVo.warehouse.value<5"> 保存修改</button>
-                        <button class="btn btn-info" type="button"
-                                ng-if="gc.info.crmCustomerVo.warehouse.value==5"> 获取</button>
+                                ng-if="gc.isOwner && gc.info.crmCustomerVo.warehouse.value<5"> 保存修改
+                        </button>
+                        <button class="btn btn-info" type="button" ng-click="gc.obtain()"
+                                ng-if="gc.info.crmCustomerVo.warehouse.value==5&&gc.info.openLock"> 获取
+                        </button>
                       </div>
                       <div class="col-md-12 center" ng-if="gc.profile.isAdmin==1">
-                        <button class="btn btn-primary" type="button"> 接管客户</button>
-                        <button class="btn btn-inverse" type="button"> 加入冲突库</button>
+                        <button class="btn btn-primary" type="button" ng-click="gc.takeover()"> 接管客户</button>
+                        <button class="btn btn-inverse" type="button" ng-click="gc.setConflict()"> 加入冲突库</button>
                       </div>
                     </div>
                   </form>
@@ -443,10 +506,10 @@
                         <input class="" type="text" ng-model="contact.email"/>
                       </td>
                       <td class="hidden-480 center align-middle nowrap">
-                        <label ng-click="contact.isPrimary=true"><input type="radio" name="isPrimary[{{$index}}]"
-                                                                        ng-checked="contact.isPrimary"/> 是</label>
-                        <label ng-click="contact.isPrimary=false"><input type="radio" name="isPrimary[{{$index}}]"
-                                                                         ng-checked="!contact.isPrimary"/> 否</label>
+                        <label ng-click="contact.isPrimary=1"><input type="radio" name="isPrimary[{{$index}}]"
+                                                                        ng-checked="contact.isPrimary==1"/> 是</label>
+                        <label ng-click="contact.isPrimary=2"><input type="radio" name="isPrimary[{{$index}}]"
+                                                                         ng-checked="!contact.isPrimary==2"/> 否</label>
                       </td>
                       <td class="center align-middle nowrap">
                         <a class="fn-visit-record-edit red"
@@ -465,7 +528,7 @@
                       <td class="hidden-480 align-middle" ng-bind="contact.email"></td>
                       <td class="hidden-480 center align-middle" ng-bind="contact.isPrimary?'是':'否'"></td>
                       <td class="center align-middle nowrap"><a class="fn-visit-record-edit red"
-                                                                ng-click="gc.addLog={linkmanId:contact.name}"
+                                                                ng-click="gc.addLog={linkmanId:contact.id,linkman:contact.name}"
                                                                 href="javascript:void(0);">填写拜访记录</a></td>
                     </tr>
                     <!-- -->
@@ -495,7 +558,7 @@
                                     <label>客户联系人</label>
                                   </td>
                                   <td class="align-middle">
-                                    <input type="text" readonly ng-model="gc.addLog.linkmanId"/>
+                                    <input type="text" readonly ng-model="gc.addLog.linkman"/>
                                   </td>
                                 </tr>
                                 <tr>
@@ -503,14 +566,14 @@
                                     <label>通话类型</label>
                                   </td>
                                   <td class="align-middle">
-                                    <label ng-click="gc.addLog.callType='呼入'">
+                                    <label ng-click="gc.addLog.callType=1">
                                       <input name="callType" type="radio" class="ace"
-                                             ng-checked="gc.addLog.callType=='呼入'"/>
+                                             ng-checked="gc.addLog.callType==1"/>
                                       <span class="lbl"> 呼入</span>
                                     </label>&emsp;
-                                    <label ng-click="gc.addLog.callType='呼出'">
+                                    <label ng-click="gc.addLog.callType=2">
                                       <input name="callType" type="radio" class="ace"
-                                             ng-checked="gc.addLog.callType=='呼出'"/>
+                                             ng-checked="gc.addLog.callType==2"/>
                                       <span class="lbl"> 呼出</span>
                                     </label>
                                   </td>
@@ -521,22 +584,6 @@
                                   </td>
                                   <td class="align-middle">
                                     <textarea class="form-control" ng-model="gc.addLog.contactDesc"></textarea>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="align-middle nowrap align-right">
-                                    <label>录音编码</label>
-                                  </td>
-                                  <td class="align-middle">
-                                    <input type="text" ng-model="gc.addLog.sn"/>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="align-middle nowrap align-right">
-                                    <label>录音文件路径</label>
-                                  </td>
-                                  <td class="align-middle">
-                                    <input type="text" ng-model="gc.addLog.file"/>
                                   </td>
                                 </tr>
                                 <tr ng-if="false">

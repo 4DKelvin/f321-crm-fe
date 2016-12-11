@@ -92,7 +92,7 @@
         vm.submit = function () {
           f321Api.customer$save(vm.params).then(function () {
             toastr.success('添加客户信息成功~', '操作成功');
-            $state.go(-1);
+            vm.addNew = false;
           }, function (err) {
             toastr.error(err, '出错');
           });

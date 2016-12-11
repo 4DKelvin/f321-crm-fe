@@ -90,13 +90,13 @@
                     <label>品牌</label>
                   </td>
                   <td class="align-middle">
-                    <input type="text" ng-model="bar.params.brand"/>
+                    <input type="text" ng-model="bar.params.brand" style="width: 100%"/>
                   </td>
                   <td class="align-middle nowrap align-right">
                     <label>所在区域</label>
                   </td>
                   <td class="align-middle">
-                    <select ng-model="bar.params.loc"
+                    <select ng-model="bar.params.loc" style="width: 100%"
                             ng-options="loc as loc.nameCn group by loc.parentName for loc in bar.locations track by loc.sn">
                     </select>
                   </td>
@@ -106,59 +106,45 @@
                     <label>关键字</label>
                   </td>
                   <td class="align-middle">
-                    <input type="text" ng-model="bar.params.keyword"/>
+                    <input type="text" ng-model="bar.params.keyword" style="width: 100%"/>
                   </td>
                   <td class="align-middle nowrap align-right">
                     <label>行业</label>
                   </td>
                   <td class="align-middle">
-                    <input type="text" ng-model="bar.params.industry"/>
+                    <input type="text" ng-model="bar.params.industry" style="width: 100%"/>
                   </td>
                 </tr>
                 <tr>
                   <td class="align-middle nowrap align-right">
                     <label>地址</label>
                   </td>
-                  <td class="align-middle">
-                    <input type="text" ng-model="bar.params.address"/>
+                  <td class="align-middle" colspan="3">
+                    <input type="text" ng-model="bar.params.address" style="width:100%"/>
                   </td>
+                </tr>
+                <tr>
                   <td class="align-middle nowrap align-right">
                     <label>网站</label>
                   </td>
-                  <td class="align-middle">
-                    <input type="text" ng-model="bar.params.website"/>
+                  <td class="align-middle" colspan="3">
+                    <input type="text" ng-model="bar.params.website" style="width:100%"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="align-middle nowrap align-right">
+                    <label>来源</label>
+                  </td>
+                  <td class="align-middle" colspan="3">
+                    <input type="text" ng-model="bar.params.source" style="width:100%"/>
                   </td>
                 </tr>
                 <tr>
                   <td class="align-middle nowrap align-right">
                     <label>简介</label>
                   </td>
-                  <td class="align-middle">
-                    <input type="text" ng-model="bar.params.intro"/>
-                  </td>
-                  <td class="align-middle nowrap align-right">
-                    <label>客户意向度</label>
-                  </td>
-                  <td class="align-middle">
-                    <select ng-model="bar.params.intention"
-                            ng-options="inter as inter.name for inter in bar.intentionType track by inter.value">
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="align-middle nowrap align-right">
-                    <label>所属库</label>
-                  </td>
-                  <td class="align-middle">
-                    <select ng-model="bar.params.warehouse"
-                            ng-options="ware as ware.name for ware in bar.warehouseType track by ware.value">
-                    </select>
-                  </td>
-                  <td class="align-middle nowrap align-right">
-                    <label>来源</label>
-                  </td>
-                  <td class="align-middle">
-                    <input type="text" ng-model="bar.params.source"/>
+                  <td class="align-middle" colspan="3">
+                    <textarea type="text" ng-model="bar.params.intro" rows="5" style="width:100%;resize: none"></textarea>
                   </td>
                 </tr>
                 </tbody>
@@ -217,11 +203,11 @@
                     <input ng-model="contact.email" type="text"/>
                   </td>
                   <td class="hidden-480 center align-middle nowrap">
-                    <label ng-click="contact.isPrimary=true">
-                      <input type="radio" name="isPrimary[{{$index}}]" ng-checked="contact.isPrimary = true"/> 是
+                    <label ng-click="contact.isPrimary=1">
+                      <input type="radio" name="isPrimary[{{$index}}]" ng-checked="contact.isPrimary == 1"/> 是
                     </label>
-                    <label ng-click="contact.isPrimary=false">
-                      <input type="radio" name="isPrimary[{{$index}}]" ng-checked="contact.isPrimary = false"/> 否
+                    <label ng-click="contact.isPrimary=2">
+                      <input type="radio" name="isPrimary[{{$index}}]" ng-checked="contact.isPrimary == 2"/> 否
                     </label>
                   </td>
                   <td class="center align-middle nowrap">

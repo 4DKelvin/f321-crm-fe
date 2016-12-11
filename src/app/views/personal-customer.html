@@ -22,11 +22,19 @@
                       </select>
                     </label>
                   </div>
-                  <div class="col-sm-6" ng-if="pcc.title=='客户管理'">
+                  <div class="col-sm-3" ng-if="pcc.title=='客户管理'">
                     <label>
                       所属库：
                       <select ng-model="pcc.params.content.warehouse"
                               ng-options="ware as ware.name for ware in pcc.warehouseType track by ware.value">
+                      </select>
+                    </label>
+                  </div>
+                  <div class="col-sm-3" ng-if="pcc.title=='客户管理'">
+                    <label>
+                      业务员：
+                      <select ng-model="pcc.params.content.ownerId"
+                              ng-options="acc as acc.name for acc in pcc.accounts track by acc.value">
                       </select>
                     </label>
                   </div>
@@ -46,7 +54,7 @@
                 <tr>
                   <th class="center">
                     <label>
-                      <input type="checkbox" class="ace"/>
+                      <input type="checkbox" class="ace"  ng-click="pcc.check()" ng-checked="pcc.checked"/>
                       <span class="lbl"></span>
                     </label>
                   </th>
@@ -63,7 +71,7 @@
                 <tr ng-repeat="row in pcc.list">
                   <td class="center">
                     <label>
-                      <input type="checkbox" class="ace"/>
+                      <input type="checkbox" class="ace" ng-click="row.checked=!row.checked" ng-checked="row.checked"/>
                       <span class="lbl"></span>
                     </label>
                   </td>
@@ -80,6 +88,15 @@
                 <!-- -->
                 </tbody>
               </table>
+              <div ng-if="pcc.title=='客户管理'" style="padding: 5px;border:1px solid #ccc;border-top:none;text-align: right">
+                转让选中的客户到业务员:
+                <select ng-model="pcc.target"
+                        ng-options="acc as acc.name for acc in pcc.accounts track by acc.value">
+                </select>
+                <a class="btn btn-grey"
+                   href="javascript:void(0);"
+                   ng-click="pcc.askover()">确定</a>
+              </div>
               <!-- -->
               <ace-pager index="pcc.params.index" size="pcc.params.size" count="pcc.count"
                          len="pcc.list.length"></ace-pager>

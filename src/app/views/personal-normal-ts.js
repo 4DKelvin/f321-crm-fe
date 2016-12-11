@@ -45,11 +45,34 @@
         }
         return '';
       }), vm.params.ts, vm.params.warehouse).then(function (res) {
-        toastr.success('批量修改TS值成功', '操作失败');
+        toastr.success('批量修改TS值成功', '操作成功');
+      }, function (err) {
+        toastr.error(err, '操作失败');
+      });
+    };
+
+    vm.submit = function () {
+      f321Api.partner$apply(vm.addNew.id, vm.addNew.partnerId.value).then(function (res) {
+        toastr.success('设置地勤人员成功', '操作成功');
+        vm.addNew = false;
       }, function (err) {
         toastr.error(err, '操作失败');
       });
     };
     vm.search();
+
+    f321Api.user$list({
+      index: 0,
+      size: 100
+    }).then(function (res) {
+      vm.accounts = res ? res.pageContent.map(function (acc) {
+        return {
+          name: acc.comName,
+          value: acc.id
+        };
+      }) : [];
+    }, function (err) {
+
+    });
   }
 })();

@@ -75,7 +75,12 @@
                             <label>性别</label>
                           </td>
                           <td class="align-middle">
-                            <input type="text" ng-model="an.user.sex"/>
+                            <label ng-click="an.user.sex=1">
+                              <input type="radio" name="sex" ng-checked="an.user.sex==1"/> 女
+                            </label>
+                            <label ng-click="an.user.sex=2">
+                              <input type="radio" name="sex" ng-checked="an.user.sex==2"/> 男
+                            </label>
                           </td>
                         </tr>
                         <tr>

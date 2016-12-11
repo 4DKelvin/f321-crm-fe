@@ -38,7 +38,8 @@
                 <tr>
                   <th class="nowrap">
                     <label>
-                      <input type="checkbox" class="ace" name="clientType" ng-click="pnts.checkedAll()" ng-checked="pnts.checked"/>
+                      <input type="checkbox" class="ace" name="clientType" ng-click="pnts.checkedAll()"
+                             ng-checked="pnts.checked"/>
                       <span class="lbl"> 客户编号</span>
                     </label>
                   </th>
@@ -53,7 +54,8 @@
                 <tr ng-repeat="item in pnts.list">
                   <td class="nowrap align-middle">
                     <label>
-                      <input type="checkbox" class="ace" ng-checked="item.checked" ng-click="item.checked = !item.checked"/>
+                      <input type="checkbox" class="ace" ng-checked="item.checked"
+                             ng-click="item.checked = !item.checked"/>
                       <span class="lbl" ng-bind="'&nbsp;'+item.sn"></span>
                     </label>
                   </td>
@@ -65,6 +67,7 @@
                   <td class="center nowrap align-middle" ng-bind="item.lockTs - item.lockT"></td>
                   <td class="center nowrap align-middle">
                     <button type="button" class="btn btn-info btn-xs" ng-click="pnts.saveTs(item)">调整TS</button>
+                    <button type="button" class="btn btn-info btn-xs" ng-click="pnts.addNew = item">地勤申请</button>
                   </td>
                 </tr>
                 <!-- -->
@@ -73,6 +76,62 @@
             </div>
           </div>
         </div>
+
+        <div class="logTemplate" ng-if="pnts.addNew">
+
+          <div class="widget-box transparent">
+            <div class="widget-header">
+              <h4>地勤申请</h4>
+            </div>
+            <div class="widget-body">
+              <div class="widget-main no-padding-right no-padding-left">
+                <form class="form-horizontal" role="form">
+                  <fieldset>
+
+                    <table class="table table-bordered no-margin-bottom">
+                      <tbody>
+                      <tr>
+                        <td class="align-middle nowrap align-right">
+                          <label>客户名</label>
+                        </td>
+                        <td colspan="3">
+                          <input type="text" readonly style="width: 100%" ng-model="pnts.addNew.name"/>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle nowrap align-right">
+                          <label>业务员</label>
+                        </td>
+                        <td colspan="3">
+                          <select ng-model="pnts.addNew.partnerId"
+                                  ng-options="acc as acc.name for acc in pnts.accounts track by acc.value">
+                          </select>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <div class="space-24"></div>
+                    <div class="clearfix form-actions">
+                      <div class="col-md-offset-8 col-md-2">
+                        <button class="btn btn-info" type="button" ng-click="pnts.submit()">
+                          <i class="icon-ok bigger-110"></i>
+                          确定
+                        </button>
+                      </div>
+                      <div class="col-md-2">
+                        <button class="btn btn-danger" type="button" ng-click="pnts.addNew=false">
+                          <i class="icon-cancel bigger-110"></i>
+                          取消
+                        </button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
       <!-- /.page-content -->
     </div>

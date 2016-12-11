@@ -161,16 +161,6 @@
         templateUrl: 'app/views/personal-modify.html',
         controller: 'personalModify',
         controllerAs: 'pm'
-      }, {
-        group: '个人资源管理',
-        groupIco: 'icon-puzzle-piece',
-        text: '冲突客户申请',
-        key: 'p-conflict',
-        url: '/personal/conflict',
-        cache: false,
-        templateUrl: 'app/views/personal-conflict.html',
-        controller: 'personalConflict',
-        controllerAs: 'pcf'
       }, /*公共资源管理*/{
         group: '公共资源管理',
         groupIco: 'icon-globe',
@@ -208,9 +198,9 @@
         key: 'g-commons-pay',
         url: '/global/commons-pay',
         cache: false,
-        templateUrl: 'app/views/global-commons-pay.html',
-        controller: 'globalCommonsPay',
-        controllerAs: 'gcsp'
+        templateUrl: 'app/views/personal-customer.html',
+        controller: 'personalCustomer',
+        controllerAs: 'pcc'
       }, {
         group: '公共资源管理',
         groupIco: 'icon-globe',
@@ -218,9 +208,9 @@
         key: 'g-renounce',
         url: '/global/renounce',
         cache: false,
-        templateUrl: 'app/views/global-renounce.html',
-        controller: 'globalRenounce',
-        controllerAs: 'gre'
+        templateUrl: 'app/views/personal-customer.html',
+        controller: 'personalCustomer',
+        controllerAs: 'pcc'
       }, {
         group: '公共资源管理',
         groupIco: 'icon-globe',
@@ -228,9 +218,9 @@
         key: 'g-out',
         url: '/global/out',
         cache: false,
-        templateUrl: 'app/views/global-out.html',
-        controller: 'globalOut',
-        controllerAs: 'go'
+        templateUrl: 'app/views/personal-customer.html',
+        controller: 'personalCustomer',
+        controllerAs: 'pcc'
       }, /*客户资源管理*/{
         group: '客户资源管理',
         groupIco: 'icon-user',
@@ -244,23 +234,13 @@
       }, {
         group: '客户资源管理',
         groupIco: 'icon-user',
-        text: '资料变更申请',
-        key: 'c-modify',
-        url: '/client/modify',
+        text: '客户检索',
+        key: 'c-search',
+        url: '/client/search',
         cache: false,
-        templateUrl: 'app/views/client-modify.html',
-        controller: 'clientModify',
-        controllerAs: 'cm'
-      }, {
-        group: '客户资源管理',
-        groupIco: 'icon-user',
-        text: '冲突客户申请',
-        key: 'c-conflict',
-        url: '/client/conflict',
-        cache: false,
-        templateUrl: 'app/views/client-conflict.html',
-        controller: 'clientConflict',
-        controllerAs: 'cc'
+        templateUrl: 'app/views/client-search.html',
+        controller: 'clientSearch',
+        controllerAs: 'cs'
       }, {
         group: '客户资源管理',
         groupIco: 'icon-user',
@@ -271,6 +251,16 @@
         templateUrl: 'app/views/client-new.html',
         controller: 'clientNew',
         controllerAs: 'cn'
+      },{
+        group: '客户资源管理',
+        groupIco: 'icon-user',
+        text: '地勤申请列表',
+        key: 'c-partner',
+        url: '/partner/list',
+        cache: false,
+        templateUrl: 'app/views/partner-list.html',
+        controller: 'partnerList',
+        controllerAs: 'pl'
       }, /*CTI中心*/{
         group: 'CTI中心',
         groupIco: 'icon-comments',

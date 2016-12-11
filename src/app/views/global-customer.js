@@ -5,7 +5,7 @@
     .module('f321CrmFe')
     .controller('globalCustomer', globalCustomer);
   /** @ngInject */
-  function globalCustomer($q, f321Api, toastr, $stateParams, $scope, $state,$cookies) {
+  function globalCustomer($q, f321Api, toastr, $stateParams, $scope, $state, $cookies) {
     var vm = this;
     vm.profile = $.parseJSON($cookies.get('profile'));
     vm.locations = $.parseJSON(localStorage.getItem('location'));
@@ -210,6 +210,32 @@
       })
     };
 
+    vm.obtain = function () {
+      f321Api.obtain($stateParams.id).then(function (res) {
+        toastr.success('设置成功!', '操作成功');
+        $state.reload();
+      }, function (err) {
+        toastr.error(err, '出错');
+      });
+    };
+
+    vm.takeover = function () {
+      f321Api.takeover([$stateParams.id]).then(function (res) {
+        toastr.success('设置成功!', '操作成功');
+        $state.reload();
+      }, function (err) {
+        toastr.error(err, '出错');
+      });
+    };
+    vm.setConflict = function(){
+      f321Api.set$conflict([$stateParams.id]).then(function (res) {
+        toastr.success('设置成功!', '操作成功');
+        $state.reload();
+      }, function (err) {
+        toastr.error(err, '出错');
+      });
+    };
+
     vm.important = function (flag) {
       f321Api.customer$kac(flag, $stateParams.id).then(function (res) {
         toastr.success('设置成功!', '操作成功');
@@ -265,5 +291,29 @@
         })
       }
     }, true);
+
+
+    vm.partnerApply = function () {
+      f321Api.partner$apply(vm.partner.id, vm.partner.partnerId.value).then(function (res) {
+        toastr.success('设置地勤人员成功', '操作成功');
+        vm.partner = false;
+      }, function (err) {
+        toastr.error(err, '操作失败');
+      });
+    };
+
+    f321Api.user$list({
+      index: 0,
+      size: 100
+    }).then(function (res) {
+      vm.accounts = res ? res.pageContent.map(function (acc) {
+        return {
+          name: acc.comName,
+          value: acc.id
+        };
+      }) : [];
+    }, function (err) {
+
+    });
   }
 })();
