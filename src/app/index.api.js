@@ -205,7 +205,19 @@
       },
       customer$normal: function (params) {
         var obj = this.convert(params);
-        obj.content.warehouse = obj.content.warehouse.value;
+        for (var key in obj) {
+          if (key != 'content') {
+            if (obj[key].constructor == Object) {
+              obj[key] = obj[key].value || obj[key].sn;
+            }
+          } else {
+            for (var nk in obj['content']) {
+              if (obj['content'][nk].constructor == Object) {
+                obj['content'][nk] = obj['content'][nk].value || obj['content'][nk].sn;
+              }
+            }
+          }
+        }
         return this.base.post('customer/page', obj);
       },
       peronal$ts: function (params) {

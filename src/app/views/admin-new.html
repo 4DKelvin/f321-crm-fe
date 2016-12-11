@@ -21,10 +21,25 @@
                         <tbody>
                         <tr>
                           <td class="align-middle nowrap align-right">
-                            <label>账号</label>
+                            <label><span class="red">*</span> 账号</label>
                           </td>
-                          <td class="align-middle" colspan="3">
-                            <input type="text" ng-model="an.user.account" style="width: 100%"/>
+                          <td class="align-middle">
+                            <input type="text" ng-model="an.user.account"/>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label><span class="red">*</span> 状态</label>
+                          </td>
+                          <td class="align-middle">
+                            <label>
+                              <input type="radio" name="status" ng-checked="an.user.status==0"
+                                     ng-click="an.user.status=0"/>
+                              正常
+                            </label>
+                            <label>
+                              <input type="radio" name="status" ng-checked="an.user.status==1"
+                                     ng-click="an.user.status=1"/>
+                              锁定
+                            </label>
                           </td>
                         </tr>
                         <tr>
@@ -35,7 +50,7 @@
                             <input type="text" ng-model="an.user.homepage"/>
                           </td>
                           <td class="align-middle nowrap align-right">
-                            <label>密码</label>
+                            <label><span class="red">*</span> 密码</label>
                           </td>
                           <td class="align-middle">
                             <input type="password" ng-model="an.user.password"/>
@@ -43,18 +58,18 @@
                         </tr>
                         <tr>
                           <td class="align-middle nowrap align-right">
-                            <label>状态</label>
+                            <label><span class="red">*</span> 是否管理员</label>
                           </td>
                           <td class="align-middle">
                             <label>
                               <input type="radio" name="isAdmin" ng-checked="an.user.isAdmin==0"
                                      ng-click="an.user.isAdmin=0"/>
-                              正常
+                              是
                             </label>
                             <label>
                               <input type="radio" name="isAdmin" ng-checked="an.user.isAdmin==1"
                                      ng-click="an.user.isAdmin=1"/>
-                              锁定
+                              否
                             </label>
                           </td>
                           <td class="align-middle nowrap align-right">
@@ -66,13 +81,13 @@
                         </tr>
                         <tr>
                           <td class="align-middle nowrap align-right">
-                            <label>姓名</label>
+                            <label><span class="red">*</span> 姓名</label>
                           </td>
                           <td class="align-middle">
                             <input type="text" ng-model="an.user.realName"/>
                           </td>
                           <td class="align-middle nowrap align-right">
-                            <label>性别</label>
+                            <label><span class="red">*</span> 性别</label>
                           </td>
                           <td class="align-middle">
                             <label ng-click="an.user.sex=1">
@@ -87,14 +102,23 @@
                           <td class="align-middle nowrap align-right">
                             <label>生日</label>
                           </td>
-                          <td class="align-middle">
-                            <input type="date" ng-model="an.user.brithday"/>
+                          <td class="align-middle" ng-init="an.user.brithday=an.user.brithday||'2016-01-01'">
+                            <input type="text" ng-datepicker ng-model="an.user.brithday"/>
                           </td>
                           <td class="align-middle nowrap align-right">
-                            <label>部门</label>
+                            <label><span class="red">*</span> 部门</label>
                           </td>
                           <td class="align-middle">
-                            <input type="text" ng-model="an.user.dept"/>
+                            <label>
+                              <input type="radio" name="dept" ng-checked="an.user.dept==2"
+                                     ng-click="an.user.dept=2"/>
+                              地勤
+                            </label>
+                            <label>
+                              <input type="radio" name="dept" ng-checked="an.user.dept==1"
+                                     ng-click="an.user.dept=1"/>
+                              电销
+                            </label>
                           </td>
                         </tr>
                         <tr>
@@ -105,7 +129,7 @@
                             <input type="text" ng-model="an.user.position"/>
                           </td>
                           <td class="align-middle nowrap align-right">
-                            <label>电话</label>
+                            <label><span class="red">*</span> 电话</label>
                           </td>
                           <td class="align-middle">
                             <input type="tel" ng-model="an.user.tel"/>
@@ -147,18 +171,18 @@
                             <input type="text" ng-model="an.user.otherTel"/>
                           </td>
                           <td class="align-middle nowrap align-right">
-                            <label>入职时间</label>
+                            <label><span class="red">*</span> 入职时间</label>
                           </td>
-                          <td class="align-middle">
-                            <input type="date" ng-model="an.user.reportDt"/>
+                          <td class="align-middle" ng-init="an.user.reportDt=an.user.reportDt||'2016-01-01'">
+                            <input type="text" ng-datepicker ng-model="an.user.reportDt"/>
                           </td>
                         </tr>
                         <tr>
                           <td class="align-middle nowrap align-right">
-                            <label>上岗时间</label>
+                            <label><span class="red">*</span> 上岗时间</label>
                           </td>
-                          <td class="align-middle">
-                            <input type="date" ng-model="an.user.jobDt"/>
+                          <td class="align-middle" ng-init="an.user.jobDt=an.user.jobDt||'2016-01-01'">
+                            <input type="text" ng-datepicker ng-model="an.user.jobDt"/>
                           </td>
                           <td class="align-middle nowrap align-right">
                             <label>照片</label>

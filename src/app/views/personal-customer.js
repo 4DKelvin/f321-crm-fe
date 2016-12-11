@@ -60,7 +60,7 @@
           }
         }
         result.warehouseType = res;
-        return f321Api.peronal$normal(params);
+        return $state.current.text == '客户管理' ? f321Api.customer$normal(params) : f321Api.peronal$normal(params);
       }, function (err) {
         defer.reject(err);
       }).then(function (res) {

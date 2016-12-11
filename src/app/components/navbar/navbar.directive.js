@@ -26,7 +26,11 @@
           return toastr.info('你已经安全退出', '操作成功');
         };
         vm.params = {
-          crmContactList: []
+          crmContactList: [],
+          index: 0,
+          size: 10,
+          content: {
+          }
         };
         vm.locations = $.parseJSON(localStorage.getItem('location'));
         if (!vm.locations) {
@@ -63,6 +67,14 @@
 
           });
         }
+        vm.search = function(){
+          f321Api.search(vm.params).then(function (res) {
+            vm.list = res ? res.pageContent : [];
+            vm.count = res.total;
+          }, function (err) {
+            toastr.error(err, '出错')
+          });
+        };
         f321Api.enum$intention$Type().then(function (res) {
           vm.intentionType = [];
           for (var key in res) {

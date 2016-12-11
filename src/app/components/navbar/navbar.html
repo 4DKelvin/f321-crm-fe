@@ -51,7 +51,12 @@
                 <span>录入新客户</span>
                 <i class="icon-angle-right pull-right"></i>
               </a>
-            </li>
+            </li><li>
+            <a ng-click="bar.searchbar = true;">
+              <span>检索客户</span>
+              <i class="icon-angle-right pull-right"></i>
+            </a>
+          </li>
           </ul>
         </li>
         <li class="light-blue">
@@ -64,9 +69,137 @@
     <!-- /.navbar-header -->
   </div>
 
-  <div class="logTemplate" ng-if="bar.addNew">
+
+  <div class="logTemplate" ng-if="bar.searchbar">
 
     <div class="widget-box transparent">
+      <div class="widget-header">
+        <h4>检索客户</h4>
+      </div>
+      <div class="widget-body">
+        <div class="widget-main no-padding-right no-padding-left" style="overflow-y: auto;max-height: 500px;">
+          <form class="form-horizontal" role="form">
+            <fieldset>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="table-responsive">
+                    <div class="space-4"></div>
+                    <div class="table-header no-margin-bottom pr12 bg-eff3f8 color-393939">
+                      <div class="space-6"></div>
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <label>
+                            客户编码：<input type="text" ng-model="bar.params.content.id">
+                          </label>
+                        </div>
+                        <div class="col-sm-4">
+                          <label>
+                            电话区号：<input type="text" ng-model="bar.params.content.telAreaCode">
+                          </label>
+                        </div>
+                        <div class="col-sm-4" style="position: absolute;right: 5px;top: 60px;z-index: 100">
+                          <label style="vertical-align: top;margin-right: 15px;">
+                            所属库：
+                          </label>
+                          <select ng-model="bar.params.content.warehouseList" multiple="multiple" size="3" style="width: 175px"
+                                  ng-options="ware as ware.name for ware in bar.warehouseType track by ware.value">
+                          </select>
+                        </div>
+                        <div class="col-sm-4">
+                          <label>
+                            电话传真：<input type="text" ng-model="bar.params.content.telOrFax">
+                          </label>
+                        </div>
+                        <div class="col-sm-4">
+                          <label>
+                            手机号码：<input type="text" ng-model="bar.params.content.mobile">
+                          </label>
+                        </div>
+                        <div class="col-sm-4">
+                          <label>
+                            搜索关键：<input type="text" ng-model="bar.params.content.keyword">
+                          </label>
+                        </div>
+                      </div>
+                      <div class="space-4"></div>
+                      <div class="row">
+                        <div class="col-sm-12" style="text-align: center">
+                          <a ng-click="bar.search()" class="btn btn-success"> 查看符合条件的客户
+                            <i class="icon-search top6"></i></a>
+                        </div>
+                      </div>
+                      <div class="space-4"></div>
+                      <div class="space-4"></div>
+                      <div class="space-4"></div>
+                    </div>
+                    <!-- -->
+                    <table class="table table-striped table-bordered table-hover no-margin-bottom" ng-if="bar.list">
+                      <thead>
+                      <tr>
+                        <th class="center">
+                          <label>
+                            <input type="checkbox" class="ace" ng-click="bar.check()" ng-checked="bar.checked"/>
+                            <span class="lbl"></span>
+                          </label>
+                        </th>
+                        <th>客户名称</th>
+                        <th>关键字</th>
+                        <th class="hidden-480">最后联系时间</th>
+                        <th>未跟踪</th>
+                        <th class="hidden-480">地区</th>
+                        <th class="hidden-480">T</th>
+                        <th>有效期</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="row in bar.list">
+                        <td class="center">
+                          <label>
+                            <input type="checkbox" class="ace" ng-click="row.checked=!row.checked" ng-checked="row.checked"/>
+                            <span class="lbl"></span>
+                          </label>
+                        </td>
+                        <td>
+                          <a ui-sref="customer({id:row.id})" ng-bind="row.name"></a>
+                        </td>
+                        <td ng-bind="row.keyword"></td>
+                        <td class="hidden-480" ng-bind="row.contactDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
+                        <td>/</td>
+                        <td class="hidden-480" ng-bind="row.loc|loc"></td>
+                        <td class="hidden-480" ng-bind="row.lockT"></td>
+                        <td ng-bind="row.displayDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
+                      </tr>
+                      <!-- -->
+                      </tbody>
+                    </table>
+                    <!-- -->
+                    <ace-pager index="bar.params.index" size="bar.params.size" count="bar.count" ng-if="bar.list"
+                               len="bar.list.length"></ace-pager>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="space-24"></div>
+      <div class="clearfix form-actions">
+        <div class="col-md-offset-10 col-md-1">
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-danger" type="button" ng-click="bar.searchbar=false">
+            <i class="icon-cancel bigger-110"></i>
+            取消
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="logTemplate" ng-if="bar.addNew">
+
+    <div class="widget-box transparent" style="min-width: 80%;">
       <div class="widget-header">
         <h4>客户信息</h4>
       </div>
@@ -144,7 +277,8 @@
                     <label>简介</label>
                   </td>
                   <td class="align-middle" colspan="3">
-                    <textarea type="text" ng-model="bar.params.intro" rows="5" style="width:100%;resize: none"></textarea>
+                    <textarea type="text" ng-model="bar.params.intro" rows="5"
+                              style="width:100%;resize: none"></textarea>
                   </td>
                 </tr>
                 </tbody>
@@ -219,13 +353,13 @@
               </table>
               <div class="space-24"></div>
               <div class="clearfix form-actions">
-                <div class="col-md-offset-8 col-md-2">
+                <div class="col-md-offset-9 col-md-2">
                   <button class="btn btn-info" type="button" ng-click="bar.submit()">
                     <i class="icon-ok bigger-110"></i>
                     确定
                   </button>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                   <button class="btn btn-danger" type="button" ng-click="bar.addNew=false">
                     <i class="icon-cancel bigger-110"></i>
                     取消

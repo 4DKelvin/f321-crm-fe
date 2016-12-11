@@ -1,0 +1,127 @@
+<ace-navbar></ace-navbar>
+<div class="main-container" id="main-container">
+  <div class="main-container-inner">
+    <ace-sidebar mini="home.mini"></ace-sidebar>
+    <div class="main-content" ng-class="{'mini-side':home.mini}">
+      <ace-breadcrumb></ace-breadcrumb>
+      <div class="page-content">
+
+
+        <div class="widget-box transparent">
+          <div class="widget-header">
+            <h4>客户检索</h4>
+          </div>
+          <div class="widget-body">
+            <div class="widget-main no-padding-right no-padding-left">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="table-responsive">
+                    <div class="space-4"></div>
+                    <div class="table-header no-margin-bottom pr12 bg-eff3f8 color-393939">
+                      <div class="space-6"></div>
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <label>
+                            客户编码：<input type="text" ng-model="cs.params.content.id">
+                          </label>
+                        </div>
+                        <div class="col-sm-4">
+                          <label>
+                            电话区号：<input type="text" ng-model="cs.params.content.telAreaCode">
+                          </label>
+                        </div>
+                        <div class="col-sm-4" style="position: absolute;right: 5px;top: 60px;z-index: 100">
+                          <label style="vertical-align: top;margin-right: 15px;">
+                            所属库：
+                          </label>
+                          <select ng-model="cs.params.content.warehouseList" multiple="multiple" size="3"
+                                  style="width: 175px"
+                                  ng-options="ware as ware.name for ware in cs.warehouseType track by ware.value">
+                          </select>
+                        </div>
+                        <div class="col-sm-4">
+                          <label>
+                            电话传真：<input type="text" ng-model="cs.params.content.telOrFax">
+                          </label>
+                        </div>
+                        <div class="col-sm-4">
+                          <label>
+                            手机号码：<input type="text" ng-model="cs.params.content.mobile">
+                          </label>
+                        </div>
+                        <div class="col-sm-4">
+                          <label>
+                            搜索关键：<input type="text" ng-model="cs.params.content.keyword">
+                          </label>
+                        </div>
+                      </div>
+                      <div class="space-4"></div>
+                      <div class="row">
+                        <div class="col-sm-12" style="text-align: center">
+                          <a ng-click="cs.search()" class="btn btn-success"> 查看符合条件的客户
+                            <i class="icon-search top6"></i></a>
+                        </div>
+                      </div>
+                      <div class="space-4"></div>
+                      <div class="space-4"></div>
+                      <div class="space-4"></div>
+                    </div>
+                    <!-- -->
+                    <table class="table table-striped table-bordered table-hover no-margin-bottom" ng-if="cs.list">
+                      <thead>
+                      <tr>
+                        <th class="center">
+                          <label>
+                            <input type="checkbox" class="ace" ng-click="cs.check()" ng-checked="cs.checked"/>
+                            <span class="lbl"></span>
+                          </label>
+                        </th>
+                        <th>客户名称</th>
+                        <th>关键字</th>
+                        <th class="hidden-480">最后联系时间</th>
+                        <th>未跟踪</th>
+                        <th class="hidden-480">地区</th>
+                        <th class="hidden-480">T</th>
+                        <th>有效期</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="row in cs.list">
+                        <td class="center">
+                          <label>
+                            <input type="checkbox" class="ace" ng-click="row.checked=!row.checked"
+                                   ng-checked="row.checked"/>
+                            <span class="lbl"></span>
+                          </label>
+                        </td>
+                        <td>
+                          <a ui-sref="customer({id:row.id})" ng-bind="row.name"></a>
+                        </td>
+                        <td ng-bind="row.keyword"></td>
+                        <td class="hidden-480" ng-bind="row.contactDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
+                        <td>/</td>
+                        <td class="hidden-480" ng-bind="row.loc|loc"></td>
+                        <td class="hidden-480" ng-bind="row.lockT"></td>
+                        <td ng-bind="row.displayDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
+                      </tr>
+                      <!-- -->
+                      </tbody>
+                    </table>
+                    <!-- -->
+                    <ace-pager index="cs.params.index" size="cs.params.size" count="cs.count" ng-if="cs.list"
+                               len="cs.list.length"></ace-pager>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.page-content -->
+    </div>
+    <!-- /.main-content -->
+  </div>
+  <!-- /.main-container-inner -->
+  <ace-top></ace-top>
+</div><!-- /.main-container -->

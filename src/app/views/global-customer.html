@@ -653,8 +653,8 @@
                     <tbody>
                     <tr ng-repeat="log in gc.info.crmContactLogList">
                       <td class="center align-middle nowrap" ng-bind="log.createrName"></td>
-                      <td class="hidden-480 align-middle" ng-bind="log.callType"></td>
-                      <td class="hidden-480 align-middle" ng-bind="log.contactDesc"></td>
+                      <td class="hidden-480 align-middle center" ng-bind="log.callType==1?'呼入':'呼出'"></td>
+                      <td class="hidden-480 align-middle center" ng-bind="log.contactDesc"></td>
                       <td class="center align-middle nowrap" ng-bind="log.contactDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
                       <td class="center align-middle nowrap"><a class="red" href="javascript:void(0);">修改录音</a></td>
                     </tr>
@@ -699,10 +699,10 @@
                     <tbody>
                     <tr ng-repeat="log in gc.info.crmGiveupLogList">
                       <td class="center align-middle nowrap" ng-bind="log.operatorName"></td>
-                      <td class="align-middle" ng-bind="log.reasonId.value"></td>
-                      <td class="hidden-480 align-middle" ng-bind="log.conflictType.value"></td>
-                      <td class="hidden-480 align-middle" ng-bind="log.reason"></td>
-                      <td class="hidden-480 center align-middle" ng-bind="operateDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
+                      <td class="align-middle center" ng-bind="log.reasonId.name"></td>
+                      <td class="hidden-480 align-middle center" ng-bind="log.conflictType.name"></td>
+                      <td class="hidden-480 align-middle center" ng-bind="log.reason"></td>
+                      <td class="hidden-480 center align-middle center" ng-bind="operateDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
                     </tr>
                     <!-- -->
                     </tbody>
@@ -749,7 +749,7 @@
                               <div class="widget-body">
                                 <div class="widget-main no-padding">
                                   <span class="green" ng-bind="log.operatorName"></span>
-                                  <span class="orange" ng-bind="log.type.value"></span>
+                                  <span class="orange" ng-bind="log.type.name"></span>
                                   客户！
                                 </div>
                               </div>

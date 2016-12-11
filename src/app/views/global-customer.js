@@ -120,8 +120,8 @@
               if (log.type == type.value) {
                 log.type = type;
               }
-              return log;
             });
+            return log;
           });
         }
         if (result.info.crmGiveupLogList) {
@@ -173,12 +173,14 @@
     vm.saveGiveup = function (giveup) {
       giveup.customerId = $stateParams.id;
       f321Api.giveup$save(giveup).then(function (res) {
-        f321Api.giveup$log($stateParams.id, vm.info.crmGiveupLog.page, vm.info.crmGiveupLog.size).then(function (res) {
-          vm.info.crmGiveupLogList = res.pageContent;
-          vm.info.crmGiveupLog.total = res.total;
-        }, function (err) {
-          toastr.error(err, '出错');
-        });
+        if (vm.info.crmGiveupLog) {
+          f321Api.giveup$log($stateParams.id, vm.info.crmGiveupLog.page, vm.info.crmGiveupLog.size).then(function (res) {
+            vm.info.crmGiveupLogList = res.pageContent;
+            vm.info.crmGiveupLog.total = res.total;
+          }, function (err) {
+            toastr.error(err, '出错');
+          });
+        }
         toastr.success('放弃客户成功!', '操作成功');
         giveup = false;
       }, function (err) {
@@ -187,13 +189,16 @@
     };
     vm.saveLog = function (log) {
       log.contactDt = new Date().toDateString();
+      log.customerId = $stateParams.id;
       f321Api.contact$log$save(log).then(function (res) {
-        f321Api.contact$log($stateParams.id, vm.info.crmContactLog.page, vm.info.crmContactLog.size).then(function (res) {
-          vm.info.crmContactLogList = res.pageContent;
-          vm.info.crmContactLog.total = res.total;
-        }, function (err) {
-          toastr.error(err, '出错');
-        });
+        if (vm.info.crmContactLog) {
+          f321Api.contact$log($stateParams.id, vm.info.crmContactLog.page, vm.info.crmContactLog.size).then(function (res) {
+            vm.info.crmContactLogList = res.pageContent;
+            vm.info.crmContactLog.total = res.total;
+          }, function (err) {
+            toastr.error(err, '出错');
+          });
+        }
         toastr.success('添加成功!', '操作成功');
         log = false;
       }, function (err) {
@@ -227,7 +232,7 @@
         toastr.error(err, '出错');
       });
     };
-    vm.setConflict = function(){
+    vm.setConflict = function () {
       f321Api.set$conflict([$stateParams.id]).then(function (res) {
         toastr.success('设置成功!', '操作成功');
         $state.reload();
