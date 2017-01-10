@@ -68,6 +68,11 @@
       vm.params.crmContactList.splice(vm.params.crmContactList.indexOf(contact), 1);
     };
     vm.submit = function () {
+      if (!vm.params.name || !vm.params.industry || !vm.params.loc || !vm.crmContactList.some(function (e) {
+          return !e.name || !e.sex || !(e.mobile || e.tel) || !e.isPrimary;
+        })) {
+        return toastr.error('请输入完整的信息', '出错');
+      }
       f321Api.customer$save(vm.params).then(function () {
         toastr.success('添加客户信息成功~', '操作成功');
         $state.go(-1);

@@ -60,7 +60,7 @@
         cache: false,
         templateUrl: 'app/views/setting-password.html',
         controller: 'settingPassword',
-        controllerAs: 'password'
+        controllerAs: 'pwd'
       }, {
         group: '个人设置中心',
         groupIco: 'icon-cog',
@@ -70,7 +70,7 @@
         cache: false,
         templateUrl: 'app/views/setting-profile.html',
         controller: 'settingProfile',
-        controllerAs: 'profile'
+        controllerAs: 'p'
       }, {
         group: '系统设置',
         groupIco: 'icon-cog',
@@ -97,6 +97,16 @@
         text: '普通库',
         key: 'p-normal',
         url: '/personal/normal',
+        cache: false,
+        templateUrl: 'app/views/personal-normal.html',
+        controller: 'personalNormal',
+        controllerAs: 'pn'
+      },{
+        group: '个人资源管理',
+        groupIco: 'icon-puzzle-piece',
+        text: '签单未到账',
+        key: 'p-unreceive',
+        url: '/personal/unreceive',
         cache: false,
         templateUrl: 'app/views/personal-normal.html',
         controller: 'personalNormal',
@@ -231,16 +241,6 @@
         templateUrl: 'app/views/personal-customer.html',
         controller: 'personalCustomer',
         controllerAs: 'pcc'
-      }, {
-        group: '客户资源管理',
-        groupIco: 'icon-user',
-        text: '客户检索',
-        key: 'c-search',
-        url: '/client/search',
-        cache: false,
-        templateUrl: 'app/views/client-search.html',
-        controller: 'clientSearch',
-        controllerAs: 'cs'
       }, {
         group: '客户资源管理',
         groupIco: 'icon-user',

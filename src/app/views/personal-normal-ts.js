@@ -30,7 +30,9 @@
     };
     vm.search = function () {
       f321Api.peronal$ts(vm.params).then(function (res) {
-        vm.list = res ? res.map(function (e) {
+        vm.ts = res.ts;
+        vm.freeTs = res.freeTs;
+        vm.list = res && res.customerTsList ? res.customerTsList.map(function (e) {
           e.checked = false;
           return e;
         }) : [];

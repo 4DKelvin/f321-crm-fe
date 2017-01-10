@@ -62,12 +62,12 @@
                           </td>
                           <td class="align-middle">
                             <label>
-                              <input type="radio" name="isAdmin" ng-checked="an.user.isAdmin==0"
+                              <input type="radio" name="isAdmin" ng-checked="an.user.isAdmin==1"
                                      ng-click="an.user.isAdmin=0"/>
                               是
                             </label>
                             <label>
-                              <input type="radio" name="isAdmin" ng-checked="an.user.isAdmin==1"
+                              <input type="radio" name="isAdmin" ng-checked="an.user.isAdmin==2"
                                      ng-click="an.user.isAdmin=1"/>
                               否
                             </label>
@@ -103,7 +103,7 @@
                             <label>生日</label>
                           </td>
                           <td class="align-middle" ng-init="an.user.brithday=an.user.brithday||'2016-01-01'">
-                            <input type="text" ng-datepicker ng-model="an.user.brithday"/>
+                            <input type="text" ng-datepicker ng-model="an.user.brithday | date:'yyyy-MM-dd'"/>
                           </td>
                           <td class="align-middle nowrap align-right">
                             <label><span class="red">*</span> 部门</label>
@@ -174,7 +174,7 @@
                             <label><span class="red">*</span> 入职时间</label>
                           </td>
                           <td class="align-middle" ng-init="an.user.reportDt=an.user.reportDt||'2016-01-01'">
-                            <input type="text" ng-datepicker ng-model="an.user.reportDt"/>
+                            <input type="text" ng-datepicker ng-model="an.user.reportDt | date:'yyyy-MM-dd'"/>
                           </td>
                         </tr>
                         <tr>
@@ -182,7 +182,7 @@
                             <label><span class="red">*</span> 上岗时间</label>
                           </td>
                           <td class="align-middle" ng-init="an.user.jobDt=an.user.jobDt||'2016-01-01'">
-                            <input type="text" ng-datepicker ng-model="an.user.jobDt"/>
+                            <input type="text" ng-datepicker ng-model="an.user.jobDt | date:'yyyy-MM-dd'"/>
                           </td>
                           <td class="align-middle nowrap align-right">
                             <label>照片</label>

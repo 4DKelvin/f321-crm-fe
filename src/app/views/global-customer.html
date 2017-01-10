@@ -319,16 +319,16 @@
                             <input readonly="" type="text" ng-model="gc.info.crmCustomerVo.sn"/>
                           </td>
                           <td class="align-middle nowrap align-right">
-                            <label>联系人姓名</label>
-                          </td>
-                          <td class="align-middle">
-                            <input readonly="" type="text" ng-model="gc.info.crmCustomerVo.linkmanName"/>
-                          </td>
-                          <td class="align-middle nowrap align-right">
                             <label>业务员姓名</label>
                           </td>
                           <td class="align-middle">
                             <input readonly type="text" ng-model="gc.info.crmCustomerVo.ownerName"/>
+                          </td>
+                          <td class="align-middle nowrap align-right">
+                            <label>会员编码</label>
+                          </td>
+                          <td class="align-middle">
+                            <input readonly="" type="text" ng-model="gc.info.crmCustomerVo.memberId"/>
                           </td>
                         </tr>
                         <tr>
@@ -382,7 +382,7 @@
                             <label>客户有效期</label>
                           </td>
                           <td class="align-middle">
-                            <input readonly type="text" ng-model="gc.info.crmCustomerVo.contactDt"/>
+                            <input readonly type="text" ng-model="gc.info.crmCustomerVo.contactDt | date:'yyyy-MM-dd'"/>
                           </td>
                         </tr>
                         <tr>
@@ -576,6 +576,14 @@
                                              ng-checked="gc.addLog.callType==2"/>
                                       <span class="lbl"> 呼出</span>
                                     </label>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="align-middle nowrap align-right">
+                                    <label>联系方式</label>
+                                  </td>
+                                  <td class="align-middle">
+                                    <input type="text" ng-model="gc.addLog.linkmanTel"/>
                                   </td>
                                 </tr>
                                 <tr>

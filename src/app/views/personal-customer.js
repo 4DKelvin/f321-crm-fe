@@ -13,7 +13,7 @@
       content: {
         keyword: '',
         warehouse: {
-          value: 1
+          value: ''
         }
       }
     };

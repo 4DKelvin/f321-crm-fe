@@ -47,9 +47,9 @@
                         <td ng-bind="row.isAdmin==1?'是':'否'"></td>
                         <td ng-bind="row.comName"></td>
                         <td ng-bind="row.realName"></td>
-                        <td ng-bind="row.sex"></td>
+                        <td ng-bind="row.sex==2?'男':'女'"></td>
                         <td ng-bind="row.birthday"></td>
-                        <td ng-bind="row.dept"></td>
+                        <td ng-bind="row.dept==1?'电销':'地勤'"></td>
                         <td ng-bind="row.position"></td>
                         <td>
                           <a ui-sref="a-modify({user:row})">编辑</a>

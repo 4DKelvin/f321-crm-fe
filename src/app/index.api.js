@@ -277,6 +277,15 @@
           idList: idList,
           passed: passed
         });
+      },
+      user$password: function (oldPassword, newPassword) {
+        return this.base.put('user/password', {
+          oldPassword: oldPassword,
+          newPassword: newPassword
+        });
+      },
+      user$modify: function (params) {
+        return this.base.put('user/myinfo', this.convert(params));
       }
     };
   }
