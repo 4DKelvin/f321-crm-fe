@@ -11,21 +11,35 @@
     vm.locations = $.parseJSON(localStorage.getItem('location'));
     if (!vm.locations) {
       f321Api.dict$loc().then(function (res) {
-        var find = function (sn) {
-          for (var i = 0; i < res.length; i++) {
-            if (res[i].sn == sn) {
-              return res[i];
+        vm.locations = [];
+        var find = function(items,parent){
+          var returnVal = -1;
+          items.forEach(function(e){
+            if(e.sn == parent){
+              returnVal = e;
             }
-          }
-          return false;
+          });
+          return returnVal;
         };
-        vm.locations = res.map(function (loc) {
-          loc.parentName = find(loc.parent).nameCn
-          return loc;
-        });
-        vm.locations.forEach(function (type) {
-          if (type.sn == vm.info.crmCustomerVo.loc) {
-            vm.info.crmCustomerVo.loc = type;
+        res.forEach(function(e){
+          if(e.parent=='1'){
+            vm.locations.push(e);
+          }else if(find(vm.locations,e.parent)!=-1){
+            var parent = find(vm.locations,e.parent);
+            if(!parent.items){
+              parent.items = [];
+            }
+            parent.items.push(e);
+          }else{
+            vm.locations.forEach(function(loc){
+              if(find(loc.items, e.parent)!=-1){
+                var parent = find(loc.items, e.parent);
+                if(!parent.items){
+                  parent.items = [];
+                }
+                parent.items.push(e);
+              }
+            })
           }
         });
         localStorage.setItem('location', JSON.stringify(vm.locations));
@@ -177,12 +191,15 @@
           f321Api.giveup$log($stateParams.id, vm.info.crmGiveupLog.page, vm.info.crmGiveupLog.size).then(function (res) {
             vm.info.crmGiveupLogList = res.pageContent;
             vm.info.crmGiveupLog.total = res.total;
+            toastr.success('放弃客户成功!', '操作成功');
+            window.location.reload();
           }, function (err) {
             toastr.error(err, '出错');
           });
+        } else {
+          toastr.success('放弃客户成功!', '操作成功');
+          window.location.reload();
         }
-        toastr.success('放弃客户成功!', '操作成功');
-        giveup = false;
       }, function (err) {
         toastr.error(err, '出错');
       });
@@ -195,12 +212,15 @@
           f321Api.contact$log($stateParams.id, vm.info.crmContactLog.page, vm.info.crmContactLog.size).then(function (res) {
             vm.info.crmContactLogList = res.pageContent;
             vm.info.crmContactLog.total = res.total;
+            toastr.success('添加成功!', '操作成功');
+            window.location.reload();
           }, function (err) {
             toastr.error(err, '出错');
           });
+        } else {
+          toastr.success('添加成功!', '操作成功');
+          window.location.reload();
         }
-        toastr.success('添加成功!', '操作成功');
-        log = false;
       }, function (err) {
         toastr.error(err, '出错');
       });

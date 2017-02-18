@@ -13,17 +13,36 @@
     vm.locations = $.parseJSON(localStorage.getItem('location'));
     if (!vm.locations) {
       f321Api.dict$loc().then(function (res) {
-        var find = function (sn) {
-          for (var i = 0; i < res.length; i++) {
-            if (res[i].sn == sn) {
-              return res[i];
+        vm.locations = [];
+        var find = function(items,parent){
+          var returnVal = -1;
+          items.forEach(function(e){
+            if(e.sn == parent){
+              returnVal = e;
             }
-          }
-          return false;
+          });
+          return returnVal;
         };
-        vm.locations = res.map(function (loc) {
-          loc.parentName = find(loc.parent).nameCn
-          return loc;
+        res.forEach(function(e){
+          if(e.parent=='1'){
+            vm.locations.push(e);
+          }else if(find(vm.locations,e.parent)!=-1){
+            var parent = find(vm.locations,e.parent);
+            if(!parent.items){
+              parent.items = [];
+            }
+            parent.items.push(e);
+          }else{
+            vm.locations.forEach(function(loc){
+              if(find(loc.items, e.parent)!=-1){
+                var parent = find(loc.items, e.parent);
+                if(!parent.items){
+                  parent.items = [];
+                }
+                parent.items.push(e);
+              }
+            })
+          }
         });
         localStorage.setItem('location', JSON.stringify(vm.locations));
       }, function (err) {

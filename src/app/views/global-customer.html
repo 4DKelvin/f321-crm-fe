@@ -344,8 +344,14 @@
                             <label>所属地区</label>
                           </td>
                           <td class="align-middle">
-                            <select ng-model="gc.info.crmCustomerVo.loc"
-                                    ng-options="loc as loc.nameCn group by loc.parentName for loc in gc.locations track by loc.sn">
+                            <select ng-model="gc.info.crmCustomerVo.province" size="5" style="width: 110px;height: 200px"
+                                    ng-options="loc as loc.nameCn for loc in gc.locations track by loc.sn">
+                            </select>
+                            <select ng-model="gc.info.crmCustomerVo.city" size="5" style="width: 110px;height: 200px"
+                                    ng-options="loc as loc.nameCn for loc in gc.info.crmCustomerVo.province.items track by loc.sn">
+                            </select>
+                            <select ng-model="gc.info.crmCustomerVo.loc" size="5" style="width: 110px;height: 200px"
+                                    ng-options="loc as loc.nameCn for loc in gc.info.crmCustomerVo.city.items track by loc.sn">
                             </select>
                           </td>
                           <td class="align-middle nowrap align-right">
@@ -527,7 +533,7 @@
                       <td class="hidden-480 align-middle" ng-bind="contact.fax"></td>
                       <td class="hidden-480 align-middle" ng-bind="contact.email"></td>
                       <td class="hidden-480 center align-middle" ng-bind="contact.isPrimary?'是':'否'"></td>
-                      <td class="center align-middle nowrap"><a class="fn-visit-record-edit red"
+                      <td class="center align-middle nowrap"><a class="fn-visit-record-edit red" ng-if="gc.isOwner"
                                                                 ng-click="gc.addLog={linkmanId:contact.id,linkman:contact.name}"
                                                                 href="javascript:void(0);">填写拜访记录</a></td>
                     </tr>
@@ -576,14 +582,6 @@
                                              ng-checked="gc.addLog.callType==2"/>
                                       <span class="lbl"> 呼出</span>
                                     </label>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td class="align-middle nowrap align-right">
-                                    <label>联系方式</label>
-                                  </td>
-                                  <td class="align-middle">
-                                    <input type="text" ng-model="gc.addLog.linkmanTel"/>
                                   </td>
                                 </tr>
                                 <tr>
@@ -653,6 +651,7 @@
                     <tr>
                       <th class="center align-middle nowrap">业务员</th>
                       <th class="hidden-480 center align-middle nowrap">呼叫类型</th>
+                      <th class="hidden-480 center align-middle nowrap">联系方式</th>
                       <th class="hidden-480 center align-middle nowrap">联系内容</th>
                       <th class="center align-middle nowrap">联系时间</th>
                       <th class="center align-middle nowrap">操作</th>
@@ -662,9 +661,10 @@
                     <tr ng-repeat="log in gc.info.crmContactLogList">
                       <td class="center align-middle nowrap" ng-bind="log.createrName"></td>
                       <td class="hidden-480 align-middle center" ng-bind="log.callType==1?'呼入':'呼出'"></td>
+                      <td class="hidden-480 align-middle center" ng-bind="log.linkmanTel"></td>
                       <td class="hidden-480 align-middle center" ng-bind="log.contactDesc"></td>
                       <td class="center align-middle nowrap" ng-bind="log.contactDt|date:'yyyy-MM-dd hh:mm:ss'"></td>
-                      <td class="center align-middle nowrap"><a class="red" href="javascript:void(0);">修改录音</a></td>
+                      <td class="center align-middle nowrap"><a class="red" href="javascript:void(0);" v-if="gc.isOwner">修改录音</a></td>
                     </tr>
                     <!-- -->
                     </tbody>

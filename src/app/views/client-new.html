@@ -42,8 +42,14 @@
                             <span class="red">* </span><label>所在区域</label>
                           </td>
                           <td class="align-middle">
-                            <select ng-model="cn.params.loc" style="width: 100%"
-                                    ng-options="loc as loc.nameCn group by loc.parentName for loc in cn.locations track by loc.sn">
+                            <select ng-model="cn.params.province" size="5" style="width: 110px;height: 200px"
+                                    ng-options="loc as loc.nameCn for loc in cn.locations track by loc.sn">
+                            </select>
+                            <select ng-model="cn.params.city" size="5" style="width: 110px;height: 200px"
+                                    ng-options="loc as loc.nameCn for loc in cn.params.province.items track by loc.sn">
+                            </select>
+                            <select ng-model="cn.params.loc" size="5" style="width: 110px;height: 200px"
+                                    ng-options="loc as loc.nameCn for loc in cn.params.city.items track by loc.sn">
                             </select>
                           </td>
                         </tr>
